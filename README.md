@@ -6,9 +6,5 @@ Easy Trim is an Android application intended to facilitate the trimming of a boa
 ## Screenshots
 
 ```
-
+Screenshots currently unavailable.
 ```
-
-## Licence
-
-This project is licensed under the
