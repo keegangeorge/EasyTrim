@@ -48,9 +48,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     // GUI //
     private Button button, calibrateButton, submitTrim, btnSpeed;
-    private EditText trimAngleEditText;
     private WindowManager mWindowManager;
-    private TextView textView, pitchTextView, rollTextView;
+    private TextView textView, trimTextView;
     private DashboardView speedGauge;
 
     // SENSORS & GPS //
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private LocationListener locationListener;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int SENSOR_DELAY_MICROS = 16 * 1000; // 16 ms
-    private float pitch = 0, roll, finalSpeed = 0;
+    private float boatTrim = 0, roll, finalSpeed = 0;
     private SensorManager mSensorManager;
     @Nullable
     private Sensor mRotationSensor;
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // DATABASE //
     MyDatabase db;
 
-    // SHARED PREFERFENCES //
+    // SHARED PREFERENCES //
     private String unitsPref;
     private SharedPreferences sharedPref;
 
@@ -80,14 +79,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         switch (item.getItemId()) {
             case R.id.settings_item:
                 Intent intent = new Intent(this, SettingsActivity.class);
-                intent.putExtra( PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment.class.getName() );
-                intent.putExtra( PreferenceActivity.EXTRA_NO_HEADERS, true );
+                intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment.class.getName());
+                intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true);
                 startActivity(intent);
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
 
     }
@@ -96,9 +93,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflate = getMenuInflater();
         inflate.inflate(R.menu.main_menu, menu);
-
         return true;
-
     }
 
     @Override
@@ -114,11 +109,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         calibrateButton = findViewById(R.id.calibrate_button);
         submitTrim = findViewById(R.id.submit_trim);
         textView = findViewById(R.id.textView);
-        trimAngleEditText = findViewById(R.id.trim_angle);
-        pitchTextView = findViewById(R.id.pitch);
-        rollTextView = findViewById(R.id.roll);
+        trimTextView = findViewById(R.id.pitch);
         speedGauge = findViewById(R.id.speed_gauge);
-
 
         calibrateButton.setOnClickListener(this);
         submitTrim.setOnClickListener(this);
@@ -128,17 +120,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // default values set in XML, this ensures SharedPreferences is initialized with default values
         PreferenceManager.setDefaultValues(this, R.xml.pref_general, false);
 
-//        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-//        unitsPref = sharedPref.getString("units_list", "NM");
-//        Toast.makeText(this, unitsPref, Toast.LENGTH_SHORT).show();
-
-
         // DATABASE //
         db = new MyDatabase(this);
 
-
-        // Toast.makeText(this, "Database acquired!", Toast.LENGTH_SHORT).show();
-
+        // SENSORS & GPS //
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         // can be null if the sensor hardware is not available
@@ -146,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-
+        // PERMISSIONS //
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 /*
@@ -173,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onPause() {
         super.onPause();
-
         mSensorManager.unregisterListener(this);
 
     }
@@ -183,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onResume();
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         unitsPref = sharedPref.getString("units_list", "NM");
-        Toast.makeText(this, unitsPref, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, unitsPref, Toast.LENGTH_SHORT).show();
         System.out.println(unitsPref);
 
 
@@ -235,7 +219,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         switch (requestCode) {
             case 10:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    configureLocationUpdates();
                     /*
                      * Occurs when permissions are granted by the user
                      */
@@ -281,9 +264,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
         numberFormat.setMaximumFractionDigits(0);
 
-        pitchTextView.setText("PITCH: " + numberFormat.format(pitch));
-        speedGauge.setPercent((int) pitch);
-        rollTextView.setText("ROLL: " + numberFormat.format(roll));
+        trimTextView.setText("TRIM: " + numberFormat.format(boatTrim));
+        speedGauge.setPercent((int) boatTrim);
     }
 
     @Override
@@ -296,19 +278,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         float[] rotationMatrix = new float[9];
         SensorManager.getRotationMatrixFromVector(rotationMatrix, rotationVector);
 
-
-//        float[] adjustedRotationMatrix = new float[9];
-
-        // Transform rotation matrix into azimuth/pitch/roll
+        // Transform rotation matrix into azimuth/pitch/roll (pitch == boatTrim)
         float[] orientation = new float[3];
         SensorManager.getOrientation(rotationMatrix, orientation);
 
-
         // Convert radians to degrees
-        pitch = orientation[1] * -57.295779513f;
-        roll = orientation[2] * -57.295779513f;
-//        System.out.println("PITCH " + pitch);
-//        System.out.println("ROLL " + roll);
+        boatTrim = orientation[1] * -57.295779513f;
 
 
     }
@@ -316,7 +291,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.calibrate_button:
                 Intent i = new Intent(MainActivity.this, CalibrateActivity.class);
@@ -331,36 +305,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void addBoatSpecs(View view) {
-        String boatTrim = trimAngleEditText.getText().toString();
-        int boatTrimValue = Integer.parseInt(boatTrim);
-
-        Toast.makeText(this, boatTrim, Toast.LENGTH_SHORT).show();
-
-        long id = db.insertData((int) finalSpeed, (int) pitch, (int) roll, boatTrimValue);
+        long id = db.insertData((int) finalSpeed, (int) boatTrim);
 
         if (id < 0) {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
         }
-//        boatTrim.setText("");
 
 
     }
-
 
     public void viewDatabaseResults(View view) {
         String data = db.getData();
         Toast.makeText(this, data, Toast.LENGTH_LONG).show();
     }
-
-//    public void viewQueryResults (View view)
-//    {
-//        String userInputType = selectType.getText().toString();
-//        String queryResults = db.getSelectedData(userInputType);
-//        Toast.makeText(this, queryResults, Toast.LENGTH_LONG).show();
-//    }
-
 
     public class SpeedTask extends AsyncTask<Void, Float, Float> {
 
@@ -385,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                             break;
                         case "kilometersPerHour":
                             multiplier = 3.6f;
-                           speedGauge.setUnit(" km/h");
+                            speedGauge.setUnit(" km/h");
                             break;
                         case "milesPerHour":
                             multiplier = 2.23694f;
@@ -444,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         @Override
         protected void onProgressUpdate(Float... values) {
-            textView.setText("Detecting speed...");
+            textView.setText(R.string.detecting_speed);
         }
 
         @Override

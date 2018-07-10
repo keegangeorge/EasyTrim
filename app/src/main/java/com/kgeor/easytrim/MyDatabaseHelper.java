@@ -15,8 +15,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                     DatabaseConstants.TABLE_NAME + " (" +
                     DatabaseConstants.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     DatabaseConstants.BOAT_SPEED + " INTEGER, " +
-                    DatabaseConstants.BOAT_PITCH + " INTEGER, " +
-                    DatabaseConstants.BOAT_ROLL + " INTEGER, " +
                     DatabaseConstants.BOAT_TRIM + " INTEGER);";
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_NAME;

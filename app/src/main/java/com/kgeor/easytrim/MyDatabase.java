@@ -15,12 +15,10 @@ public class MyDatabase {
         helper = new MyDatabaseHelper(context);
     }
 
-    public long insertData(int speed, int pitch, int roll, int trim) {
+    public long insertData(int speed, int trim) {
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseConstants.BOAT_SPEED, speed);
-        contentValues.put(DatabaseConstants.BOAT_PITCH, pitch);
-        contentValues.put(DatabaseConstants.BOAT_ROLL, roll);
         contentValues.put(DatabaseConstants.BOAT_TRIM, trim);
         long id = db.insert(DatabaseConstants.TABLE_NAME, null, contentValues);
         return id;
@@ -29,7 +27,6 @@ public class MyDatabase {
     public String getData() {
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] columns = {DatabaseConstants.UID, DatabaseConstants.BOAT_SPEED,
-                DatabaseConstants.BOAT_PITCH, DatabaseConstants.BOAT_ROLL,
                 DatabaseConstants.BOAT_TRIM};
         Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, null, null, null, null, null);
 
@@ -38,10 +35,8 @@ public class MyDatabase {
         while (cursor.moveToNext()) {
             int index = cursor.getInt(0);
             int speed = cursor.getInt(1);
-            int pitch = cursor.getInt(2);
-            int roll = cursor.getInt(3);
-            int trim = cursor.getInt(4);
-            buffer.append("Database Index" + index + " Speed: " + speed + " Pitch: " + pitch + " Roll: " + roll + " Trim: " + trim + "\n");
+            int trim = cursor.getInt(2);
+            buffer.append("Database Index: " + index + " Speed: " + speed + " Trim: " + trim + "\n");
         }
         return buffer.toString();
     }
@@ -50,7 +45,6 @@ public class MyDatabase {
         // find out the trim angle based on the desired speed
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] columns = {DatabaseConstants.UID, DatabaseConstants.BOAT_SPEED,
-                DatabaseConstants.BOAT_PITCH, DatabaseConstants.BOAT_ROLL,
                 DatabaseConstants.BOAT_TRIM};
         String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";  //Constants.TYPE = 'type'
         Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, null);
