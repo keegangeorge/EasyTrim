@@ -16,7 +16,10 @@
         <Preference
             android:summary="@string/pref_body_calibrate"
             android:title="@string/pref_title_calibrate">
-            <!--<intent android:action="android.settings.SYNC_SETTINGS" />-->
+            <!--<intent-->
+                <!--android:action="android.intent.action.MAIN"-->
+                <!--android:targetClass="com.example.foo.SomeActivity"-->
+                <!--android:targetPackage="com.example.foo" />-->
         </Preference>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_category_title_about">
@@ -24,7 +27,9 @@
         <Preference
             android:summary="@string/pref_body_git"
             android:title="@string/pref_title_git">
-            <!--<intent android:action="android.settings.SYNC_SETTINGS" />-->
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/keegangeorge/EasyTrim.git" />
         </Preference>
 
 
