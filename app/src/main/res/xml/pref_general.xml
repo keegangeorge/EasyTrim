@@ -1,6 +1,5 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/pref_category_title_general">
-
         <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
              dismiss it. -->
         <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
@@ -17,9 +16,9 @@
             android:summary="@string/pref_body_calibrate"
             android:title="@string/pref_title_calibrate">
             <!--<intent-->
-                <!--android:action="android.intent.action.MAIN"-->
-                <!--android:targetClass="com.example.foo.SomeActivity"-->
-                <!--android:targetPackage="com.example.foo" />-->
+            <!--android:action="android.intent.action.MAIN"-->
+            <!--android:targetClass="com.example.foo.SomeActivity"-->
+            <!--android:targetPackage="com.example.foo" />-->
         </Preference>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_category_title_about">

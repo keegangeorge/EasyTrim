@@ -14,7 +14,6 @@ public class CalibrateActivity extends TutorialActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_calibrate);
 
         // Slider 1
         addFragment(new Step.Builder().setTitle("This is header 1")
