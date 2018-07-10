@@ -14,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -79,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         switch (item.getItemId()) {
             case R.id.settings_item:
                 Intent intent = new Intent(this, SettingsActivity.class);
+                intent.putExtra( PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment.class.getName() );
+                intent.putExtra( PreferenceActivity.EXTRA_NO_HEADERS, true );
                 startActivity(intent);
                 Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
                 return true;

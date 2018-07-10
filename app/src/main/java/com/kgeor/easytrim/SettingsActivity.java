@@ -116,9 +116,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            if (!super.onMenuItemSelected(featureId, item)) {
+//            if (!super.onMenuItemSelected(featureId, item)) {
                 NavUtils.navigateUpFromSameTask(this);
-            }
+//            }
             return true;
         }
         return super.onMenuItemSelected(featureId, item);
@@ -162,8 +162,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
+            // Bind the summaries of List preferences to their values.
+            // When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("units_list"));
