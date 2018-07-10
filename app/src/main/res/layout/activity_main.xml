@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+
 
     <com.anderson.dashboardview.view.DashboardView
         android:id="@+id/speed_gauge"
@@ -51,22 +53,11 @@
         android:text="Speed: "
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/trim_angle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="59dp"
-        android:ems="10"
-        android:hint="Trim Angle (km/h)"
-        android:inputType="number" />
 
     <Button
         android:id="@+id/submit_trim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/trim_angle"
         android:onClick="addBoatSpecs"
         android:text="Submit" />
 
@@ -81,23 +72,13 @@
         android:text="Pitch"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/roll"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pitch"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="Roll"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/calibrate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/roll"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Calibrate" />
 
-</RelativeLayout>
+</LinearLayout>
