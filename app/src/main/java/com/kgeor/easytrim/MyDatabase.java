@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 
 public class MyDatabase {
     private SQLiteDatabase db;
@@ -24,6 +25,7 @@ public class MyDatabase {
         return id;
     }
 
+
     public String getData() {
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] columns = {DatabaseConstants.UID, DatabaseConstants.BOAT_SPEED,
@@ -41,24 +43,63 @@ public class MyDatabase {
         return buffer.toString();
     }
 
+//    public String getSpeed(String speed) {
+//        // find out the trim angle based on the desired speed
+//        SQLiteDatabase db = helper.getWritableDatabase();
+//        String[] columns = {DatabaseConstants.UID, DatabaseConstants.BOAT_SPEED,
+//                DatabaseConstants.BOAT_TRIM};
+//        String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";  //Constants.TYPE = 'type'
+//        Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, null);
+//
+//        StringBuffer buffer = new StringBuffer();
+//        while (cursor.moveToNext()) {
+//
+//            int index1 = cursor.getColumnIndex(DatabaseConstants.BOAT_SPEED);
+//            String boatSpeed = cursor.getString(index1);
+//            buffer.append(boatSpeed + "\n");
+//        }
+//        return buffer.toString();
+//    }
+
+
     public String getSelectedData(String speed) {
-        // find out the trim angle based on the desired speed
+
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {DatabaseConstants.UID, DatabaseConstants.BOAT_SPEED,
-                DatabaseConstants.BOAT_TRIM};
-        String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";  //Constants.TYPE = 'type'
+        String[] columns = {DatabaseConstants.BOAT_SPEED, DatabaseConstants.BOAT_TRIM};
+
+        String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";
         Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, null);
 
         StringBuffer buffer = new StringBuffer();
         while (cursor.moveToNext()) {
-
             int index1 = cursor.getColumnIndex(DatabaseConstants.BOAT_SPEED);
             int index2 = cursor.getColumnIndex(DatabaseConstants.BOAT_TRIM);
-            String boatSpeed = cursor.getString(index1);
-            String boatTrim = cursor.getString(index2);
-            buffer.append(boatSpeed + " " + boatTrim + "\n");
+            String dataBoatSpeed = cursor.getString(index1);
+            String dataBoatTrim = cursor.getString(index2);
+            buffer.append(dataBoatSpeed);
         }
         return buffer.toString();
     }
+
+    public String getTrimData(String speed) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DatabaseConstants.BOAT_SPEED, DatabaseConstants.BOAT_TRIM};
+
+        String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";
+        Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, null);
+
+        StringBuffer buffer = new StringBuffer();
+
+        while (cursor.moveToNext()) {
+            int index1 = cursor.getColumnIndex(DatabaseConstants.BOAT_SPEED);
+            int index2 = cursor.getColumnIndex(DatabaseConstants.BOAT_TRIM);
+            String dataBoatSpeed = cursor.getString(index1);
+            String dataBoatTrim = cursor.getString(index2);
+            buffer.append(dataBoatTrim);
+        }
+        return buffer.toString();
+    }
+
+
 
 }

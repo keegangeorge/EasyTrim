@@ -29,7 +29,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,9 +46,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // FIELDS //
 
     // GUI //
-    private Button button, calibrateButton, submitTrim, btnSpeed;
+    private Button button, calibrateButton, submitTrim, btnSpeed, matchSpeed;
     private WindowManager mWindowManager;
-    private TextView textView, trimTextView;
+    private TextView textView, trimTextView, trimStat;
     private DashboardView speedGauge;
 
     // SENSORS & GPS //
@@ -57,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private LocationListener locationListener;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int SENSOR_DELAY_MICROS = 16 * 1000; // 16 ms
-    private float boatTrim = 0, roll, finalSpeed = 0;
+    private float boatTrim = 0, finalSpeed = 0;
+
     private SensorManager mSensorManager;
     @Nullable
     private Sensor mRotationSensor;
@@ -111,10 +111,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         textView = findViewById(R.id.textView);
         trimTextView = findViewById(R.id.pitch);
         speedGauge = findViewById(R.id.speed_gauge);
+        trimStat = findViewById(R.id.trim_up_or_down);
+        matchSpeed = findViewById(R.id.match_speed);
 
         calibrateButton.setOnClickListener(this);
         submitTrim.setOnClickListener(this);
         btnSpeed.setOnClickListener(this);
+        matchSpeed.setOnClickListener(this);
 
         // SETTINGS //
         // default values set in XML, this ensures SharedPreferences is initialized with default values
@@ -167,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onResume();
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         unitsPref = sharedPref.getString("units_list", "NM");
-        // Toast.makeText(this, unitsPref, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, unitsPref, Toast.LENGTH_SHORT).show();
         System.out.println(unitsPref);
 
 
@@ -264,8 +267,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
         numberFormat.setMaximumFractionDigits(0);
 
-        trimTextView.setText("TRIM: " + numberFormat.format(boatTrim));
-        speedGauge.setPercent((int) boatTrim);
+        trimTextView.setText("TRIM: " + (int) boatTrim);
     }
 
     @Override
@@ -301,6 +303,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
             case R.id.btnSpeed:
                 startSpeedCalc(btnSpeed);
+                break;
+            case R.id.match_speed:
+                break;
+
         }
     }
 
@@ -365,11 +371,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                     convertedSpeed = initSpeed * multiplier;
                     finalSpeed = filter(finalSpeed, convertedSpeed, 2);
+                    viewQueryResults();
 
-                    NumberFormat numberFormat = NumberFormat.getNumberInstance();
-                    numberFormat.setMaximumFractionDigits(0);
 
-                    textView.setText(numberFormat.format(finalSpeed) + getString(R.string.str_units_kilometers_hour));
 
 
                 }
@@ -414,10 +418,36 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             numberFormat.setMaximumFractionDigits(0);
             textView.setText(numberFormat.format(value) + getString(R.string.str_units_kilometers_hour));
         }
+    } // end Async inner class
+
+    public void viewQueryResults() {
+        String convertedSpeed = Integer.toString((int) finalSpeed);
+        int convertedTrim = (int) boatTrim;
+
+        String queryResults = db.getSelectedData(convertedSpeed);
+        String trimResults = db.getTrimData(convertedSpeed);
+
+        int trimResultsAsInt = Integer.parseInt(trimResults);
+
+        if (queryResults.equals(convertedSpeed)) {
+            System.out.println("Boat's Actual Trim: " + convertedTrim);
+            System.out.println("Boat's Desired Trim: " + trimResultsAsInt);
+
+            if (convertedTrim > trimResultsAsInt) {
+                // boats current trim is greater than correct trim value
+                // need to lessen trim
+                trimStat.setText("Need Less Trim!");
+            } else if (convertedTrim < trimResultsAsInt) {
+                trimStat.setText("Need More Trim!");
+            } else if (convertedTrim == trimResultsAsInt) {
+                trimStat.setText("Trim is Correct.");
+            }
+        }
     }
 
-
 } // MainActivity class end
+
+
 
 
 
