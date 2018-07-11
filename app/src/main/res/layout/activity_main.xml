@@ -24,74 +24,93 @@
 
     <Button
         android:id="@+id/btnSpeed"
-        android:layout_gravity="center"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:textColor="@color/colorAccent"
-        android:text="Start Speed" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Start Speed"
+        android:textColor="@color/colorAccent" />
 
     <!--<Button-->
-        <!--android:id="@+id/match_speed"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="27dp"-->
-        <!--android:text="Does speed match?" />-->
+    <!--android:id="@+id/match_speed"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="27dp"-->
+    <!--android:text="Does speed match?" />-->
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="Speed: "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <!--<TextView-->
+    <!--android:id="@+id/textView"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/button"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:gravity="center"-->
+    <!--android:text="Speed: "-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
 
 
-    <Button
-        android:id="@+id/submit_trim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="addBoatSpecs"
-        android:text="Submit" />
+    <!--<Button-->
+    <!--android:id="@+id/submit_trim"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="addBoatSpecs"-->
+    <!--android:text="Submit" />-->
 
 
     <TextView
         android:id="@+id/pitch"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="Pitch"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Current Trim"
+        android:textAllCaps="true"
+        android:textColor="@color/colorGray"
+        android:textSize="15sp" />
 
 
     <TextView
         android:id="@+id/trim_up_or_down"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="Waiting"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/calibrate_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Calibrate" />
+    <!--<Button-->
+    <!--android:id="@+id/calibrate_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:text="Calibrate" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:onClick="viewDatabaseResults"
-        android:text="VIEW DATA" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:onClick="viewDatabaseResults"
+            android:text="VIEW DATA"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

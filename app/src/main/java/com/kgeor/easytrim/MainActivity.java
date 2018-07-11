@@ -44,19 +44,24 @@ import java.text.NumberFormat;
  */
 public class MainActivity extends AppCompatActivity implements SensorEventListener, View.OnClickListener {
     // FIELDS //
+    public SpeedTask speedTask = new SpeedTask();
+
 
     // GUI //
-    private Button button, calibrateButton, submitTrim, btnSpeed, matchSpeed;
+    private Button button;
+    //    private Button calibrateButton;
+    private Button submitTrim;
+    protected Button btnSpeed;
     private TextView textView, trimTextView, trimStat;
-    private DashboardView speedGauge;
+    protected static DashboardView speedGauge;
 
     // SENSORS & GPS //
     private LocationManager locationManager;
     private LocationListener locationListener;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int SENSOR_DELAY_MICROS = 16 * 1000; // 16 ms
-    private float boatTrim = 0;
-    private int finalSpeed = 0;
+    protected static float boatTrim = 0;
+    protected static int finalSpeed = 0;
 
     private SensorManager mSensorManager;
     @Nullable
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     float multiplier;
 
     // DATABASE //
-    MyDatabase db;
+    static MyDatabase db;
 
     // SHARED PREFERENCES //
     private String unitsPref;
@@ -105,18 +110,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // GUI REFERENCES //
         button = findViewById(R.id.button);
         btnSpeed = findViewById(R.id.btnSpeed);
-        calibrateButton = findViewById(R.id.calibrate_button);
-        submitTrim = findViewById(R.id.submit_trim);
-        textView = findViewById(R.id.textView);
+//        calibrateButton = findViewById(R.id.calibrate_button);
+//        submitTrim = findViewById(R.id.submit_trim);
+//        textView = findViewById(R.id.textView);
         trimTextView = findViewById(R.id.pitch);
         speedGauge = findViewById(R.id.speed_gauge);
         trimStat = findViewById(R.id.trim_up_or_down);
-        matchSpeed = findViewById(R.id.match_speed);
 
-        calibrateButton.setOnClickListener(this);
-        submitTrim.setOnClickListener(this);
+//        calibrateButton.setOnClickListener(this);
+//        submitTrim.setOnClickListener(this);
         btnSpeed.setOnClickListener(this);
-        matchSpeed.setOnClickListener(this);
 
         // SETTINGS //
         // default values set in XML, this ensures SharedPreferences is initialized with default values
@@ -155,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     } // onCreate() method end
 
     public void startSpeedCalc(View view) {
-        SpeedTask speedTask = new SpeedTask();
+        // SpeedTask speedTask = new SpeedTask();
         speedTask.execute();
     }
 
@@ -276,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
         numberFormat.setMaximumFractionDigits(0);
-        trimTextView.setText("TRIM: " + (int) boatTrim);
+        trimTextView.setText("CURRENT TRIM: " + (int) boatTrim);
     }
 
     @Override
@@ -303,25 +306,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.calibrate_button:
-                Intent i = new Intent(MainActivity.this, CalibrateActivity.class);
-                startActivity(i);
-                break;
-            case R.id.submit_trim:
-                addBoatSpecs(button);
-                break;
             case R.id.btnSpeed:
                 startSpeedCalc(btnSpeed);
+                Toast.makeText(this, "Speed Calculating...", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.match_speed:
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(intent);
-                break;
+//            case R.id.calibrate_button:
+//                Intent i = new Intent(MainActivity.this, CalibrateActivity.class);
+//                startActivity(i);
+//                break;
+//            case R.id.submit_trim:
+//                addBoatSpecs(button);
+//                break;
+
+//            case R.id.match_speed:
+//                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+//                startActivity(intent);
+//                break;
         }
     }
 
     public void addBoatSpecs(View view) {
-        long id = db.insertData((int) finalSpeed, (int) boatTrim);
+        long id = db.insertData(finalSpeed, (int) boatTrim);
 
         if (id < 0) {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
@@ -424,12 +429,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         @Override
         protected void onPostExecute(Integer value) {
             configureLocationUpdates();
-
-
-            NumberFormat numberFormat = NumberFormat.getNumberInstance();
-            numberFormat.setMaximumFractionDigits(0);
             speedGauge.setPercent(value);
-            textView.setText(numberFormat.format(value) + getString(R.string.str_units_kilometers_hour));
         }
     } // end Async inner class
 

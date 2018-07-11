@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity implements
             Intent i = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(i);
         } else if (currentItemName.getText().toString().equals("Calibration")) {
-            Intent i = new Intent(HomeActivity.this, CalibrateActivity.class);
+            Intent i = new Intent(HomeActivity.this, CalibrationTempActivity.class);
             startActivity(i);
         }
     }
