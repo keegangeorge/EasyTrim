@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
+//        Toast.makeText(this, "OnResume", Toast.LENGTH_SHORT).show();
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         unitsPref = sharedPref.getString("units_list", "NM");
         Toast.makeText(this, unitsPref, Toast.LENGTH_SHORT).show();
