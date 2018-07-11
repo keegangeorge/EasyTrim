@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 
 public class MyDatabase {
     private SQLiteDatabase db;
@@ -42,24 +41,6 @@ public class MyDatabase {
         }
         return buffer.toString();
     }
-
-//    public String getSpeed(String speed) {
-//        // find out the trim angle based on the desired speed
-//        SQLiteDatabase db = helper.getWritableDatabase();
-//        String[] columns = {DatabaseConstants.UID, DatabaseConstants.BOAT_SPEED,
-//                DatabaseConstants.BOAT_TRIM};
-//        String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";  //Constants.TYPE = 'type'
-//        Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, null);
-//
-//        StringBuffer buffer = new StringBuffer();
-//        while (cursor.moveToNext()) {
-//
-//            int index1 = cursor.getColumnIndex(DatabaseConstants.BOAT_SPEED);
-//            String boatSpeed = cursor.getString(index1);
-//            buffer.append(boatSpeed + "\n");
-//        }
-//        return buffer.toString();
-//    }
 
 
     public String getSelectedData(String speed) {
@@ -99,7 +80,6 @@ public class MyDatabase {
         }
         return buffer.toString();
     }
-
 
 
 }
