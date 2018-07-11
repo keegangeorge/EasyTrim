@@ -13,8 +13,6 @@ public class CalibrationTempActivity extends AppCompatActivity implements View.O
     MainActivity main;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +24,6 @@ public class CalibrationTempActivity extends AppCompatActivity implements View.O
 
         db = new MyDatabase(this);
         main.speedGauge = findViewById(R.id.speed_gauge_calibration);
-
-
 
 
     }

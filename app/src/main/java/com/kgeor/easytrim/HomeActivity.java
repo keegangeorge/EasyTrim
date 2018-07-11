@@ -91,7 +91,6 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
 
-
     private void onItemChanged(DataItem item) {
         currentItemName.setText(item.getName());
     }

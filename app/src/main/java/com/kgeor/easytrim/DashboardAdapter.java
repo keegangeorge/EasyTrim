@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder>{
+public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder> {
     private List<DataItem> data;
 
     public DashboardAdapter(List<DataItem> data) {
@@ -44,7 +44,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     }
 
 
-
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView image;
@@ -60,7 +59,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         public void onClick(View v) {
         }
     }
-
 
 
 }
