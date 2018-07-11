@@ -14,7 +14,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "CREATE TABLE " +
                     DatabaseConstants.TABLE_NAME + " (" +
                     DatabaseConstants.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    DatabaseConstants.BOAT_SPEED + " INTEGER, " +
+                    DatabaseConstants.BOAT_SPEED + " INTEGER UNIQUE, " +
                     DatabaseConstants.BOAT_TRIM + " INTEGER);";
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_NAME;
@@ -44,4 +44,5 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Database exception onUpgrade() db", Toast.LENGTH_LONG).show();
         }
     }
+
 }
