@@ -306,8 +306,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 startSpeedCalc(btnSpeed);
                 break;
             case R.id.match_speed:
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(intent);
                 break;
-
         }
     }
 
@@ -373,8 +374,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     convertedSpeed = initSpeed * multiplier;
                     finalSpeed = filter(finalSpeed, convertedSpeed, 2);
                     viewQueryResults();
-
-
 
 
                 }
