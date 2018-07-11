@@ -12,9 +12,8 @@
         android:id="@+id/speed_gauge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:text="@string/gauge_title_speed"
         app:centerCircleColor="@color/colorBlue"
         app:endProgressColor="@color/colorBlueAlternate"
@@ -23,31 +22,22 @@
         app:startProgressColor="@color/colorBlue"
         app:unit=" knots" />
 
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:onClick="viewDatabaseResults"
-        android:text="VIEW DATA" />
-
     <Button
         android:id="@+id/btnSpeed"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/roll"
-        android:layout_marginStart="27dp"
-        android:text="View Speed" />
+        android:background="@color/white"
+        android:textColor="@color/colorAccent"
+        android:text="Start Speed" />
 
-    <Button
-        android:id="@+id/match_speed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:text="Does speed match?" />
+    <!--<Button-->
+        <!--android:id="@+id/match_speed"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="27dp"-->
+        <!--android:text="Does speed match?" />-->
 
     <TextView
         android:id="@+id/textView"
@@ -94,5 +84,14 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Calibrate" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:onClick="viewDatabaseResults"
+        android:text="VIEW DATA" />
 
 </LinearLayout>

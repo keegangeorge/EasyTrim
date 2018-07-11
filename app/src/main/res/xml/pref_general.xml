@@ -20,6 +20,7 @@
             <!--android:targetClass="com.example.foo.SomeActivity"-->
             <!--android:targetPackage="com.example.foo" />-->
         </Preference>
+
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_category_title_about">
 

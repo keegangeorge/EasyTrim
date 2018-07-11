@@ -2,6 +2,7 @@ package com.kgeor.easytrim;
 
 import android.content.Intent;
 import android.preference.PreferenceActivity;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,9 @@ import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements DiscreteScrollView.OnItemChangedListener,
+public class HomeActivity extends AppCompatActivity implements
+        DiscreteScrollView.OnItemChangedListener,
+        DiscreteScrollView.ScrollStateChangeListener,
         View.OnClickListener {
 
     private List<DataItem> data;
@@ -36,11 +39,14 @@ public class HomeActivity extends AppCompatActivity implements DiscreteScrollVie
 
         currentItemName = findViewById(R.id.item_name);
 
+        currentItemName.setOnClickListener(this);
+
         dashboard = HomeDashboard.get();
         data = dashboard.getData();
         itemPicker = findViewById(R.id.item_picker);
         itemPicker.setOrientation(DSVOrientation.HORIZONTAL);
         itemPicker.addOnItemChangedListener(this);
+
         infiniteAdapter = InfiniteScrollAdapter.wrap(new DashboardAdapter(data));
         itemPicker.setAdapter(infiniteAdapter);
         itemPicker.setItemTransitionTimeMillis(150);
@@ -53,7 +59,13 @@ public class HomeActivity extends AppCompatActivity implements DiscreteScrollVie
 
     @Override
     public void onClick(View v) {
-
+        if (currentItemName.getText().toString().equals("Trim View")) {
+            Intent i = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(i);
+        } else if (currentItemName.getText().toString().equals("Calibration")) {
+            Intent i = new Intent(HomeActivity.this, CalibrateActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override
@@ -79,6 +91,7 @@ public class HomeActivity extends AppCompatActivity implements DiscreteScrollVie
     }
 
 
+
     private void onItemChanged(DataItem item) {
         currentItemName.setText(item.getName());
     }
@@ -87,5 +100,20 @@ public class HomeActivity extends AppCompatActivity implements DiscreteScrollVie
     public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
         int positionInDataSet = infiniteAdapter.getRealPosition(adapterPosition);
         onItemChanged(data.get(positionInDataSet));
+    }
+
+    @Override
+    public void onScrollStart(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
+
+    }
+
+    @Override
+    public void onScrollEnd(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
+
+    }
+
+    @Override
+    public void onScroll(float scrollPosition, int currentPosition, int newPosition, @Nullable RecyclerView.ViewHolder currentHolder, @Nullable RecyclerView.ViewHolder newCurrent) {
+
     }
 }
