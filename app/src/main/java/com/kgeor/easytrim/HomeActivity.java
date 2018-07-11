@@ -1,0 +1,63 @@
+package com.kgeor.easytrim;
+
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.yarolegovich.discretescrollview.DSVOrientation;
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
+import com.yarolegovich.discretescrollview.InfiniteScrollAdapter;
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
+
+import java.util.List;
+
+public class HomeActivity extends AppCompatActivity implements DiscreteScrollView.OnItemChangedListener,
+        View.OnClickListener {
+
+    private List<DataItem> data;
+    private HomeDashboard dashboard;
+
+    private TextView currentItemName;
+    private DiscreteScrollView itemPicker;
+    private InfiniteScrollAdapter infiniteAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home_activity);
+
+        currentItemName = findViewById(R.id.item_name);
+
+        dashboard = HomeDashboard.get();
+        data = dashboard.getData();
+        itemPicker = findViewById(R.id.item_picker);
+        itemPicker.setOrientation(DSVOrientation.HORIZONTAL);
+        itemPicker.addOnItemChangedListener(this);
+        infiniteAdapter = InfiniteScrollAdapter.wrap(new DashboardAdapter(data));
+        itemPicker.setAdapter(infiniteAdapter);
+        itemPicker.setItemTransitionTimeMillis(150);
+        itemPicker.setItemTransformer(new ScaleTransformer.Builder()
+                .setMinScale(0.8f)
+                .build());
+
+        onItemChanged(data.get(0));
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    private void onItemChanged(DataItem item) {
+        currentItemName.setText(item.getName());
+    }
+
+    @Override
+    public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
+        int positionInDataSet = infiniteAdapter.getRealPosition(adapterPosition);
+        onItemChanged(data.get(positionInDataSet));
+    }
+}

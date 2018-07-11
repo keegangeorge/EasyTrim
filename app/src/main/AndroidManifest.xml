@@ -30,6 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kgeor.easytrim.MainActivity" />
         </activity>
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>
