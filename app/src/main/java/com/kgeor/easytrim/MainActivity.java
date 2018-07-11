@@ -434,14 +434,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     } // end Async inner class
 
     public void viewQueryResults() {
-//        String convertedSpeed = Integer.toString(finalSpeed);
         int convertedTrim = (int) boatTrim;
-//
-//        String queryResults = db.getSelectedData(convertedSpeed);
         int queryResults = db.getSelectedData(finalSpeed);
-//        String trimResults = db.getTrimData(convertedSpeed);
         int trimResults = db.getTrimData(finalSpeed);
-//        int trimResultsAsInt = Integer.parseInt(trimResults);
 
         if (queryResults == finalSpeed) {
             System.out.println("Boat's Actual Trim: " + convertedTrim);
@@ -456,31 +451,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         } else {
             trimStat.setText("Need calibration");
         }
-
-//        if (queryResults.equals(convertedSpeed)) {
-//            System.out.println("Boat's Actual Trim: " + convertedTrim);
-//            System.out.println("Boat's Desired Trim: " + trimResultsAsInt);
-//
-//            if (convertedTrim > trimResultsAsInt) {
-//                // boats current trim is greater than correct trim value
-//                // need to lessen trim
-//                trimStat.setText("Need Less Trim!");
-//            } else if (convertedTrim < trimResultsAsInt) {
-//                // boats current trim is less than correct trim value
-//                // need to increase trim
-//                trimStat.setText("Need More Trim!");
-//            } else if (convertedTrim == trimResultsAsInt) {
-//                // boats current trim is equal to correct trim value
-//                // keep trim the same
-//                trimStat.setText("Trim is Correct.");
-//            }
-//        } else if (!queryResults.equals(convertedSpeed)) {
-//            trimStat.setText("Re-calibrate!");
-//        } else {
-//            trimStat.setText("Re-calibrate!2");
-//        }
-
-
     }
 
 } // MainActivity class end

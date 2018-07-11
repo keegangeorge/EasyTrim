@@ -54,18 +54,17 @@ public class MyDatabase {
         String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";
         Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, null);
 
-        StringBuffer buffer = new StringBuffer();
+        int bufferInt = 0;
 
         while (cursor.moveToNext()) {
             int index1 = cursor.getColumnIndex(DatabaseConstants.BOAT_SPEED);
             int index2 = cursor.getColumnIndex(DatabaseConstants.BOAT_TRIM);
-            String dataBoatSpeed = cursor.getString(index1);
-            String dataBoatTrim = cursor.getString(index2);
-            buffer.append(dataBoatSpeed);
+
+            int dataBoatSpeed = cursor.getInt(index1);
+            int dataBoatTrim = cursor.getInt(index2);
+            bufferInt = dataBoatSpeed;
         }
-        int speedDataVal = parseInt(String.valueOf(buffer));
-//        return buffer.toString();
-        return speedDataVal;
+        return bufferInt;
     }
 
 
@@ -76,40 +75,16 @@ public class MyDatabase {
         String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";
         Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, null);
 
-        StringBuffer buffer = new StringBuffer();
+        int bufferInt = 0;
 
         while (cursor.moveToNext()) {
             int index1 = cursor.getColumnIndex(DatabaseConstants.BOAT_SPEED);
             int index2 = cursor.getColumnIndex(DatabaseConstants.BOAT_TRIM);
-            String dataBoatSpeed = cursor.getString(index1);
-            String dataBoatTrim = cursor.getString(index2);
-            buffer.append(dataBoatTrim);
+
+            int dataBoatSpeed = cursor.getInt(index1);
+            int dataBoatTrim = cursor.getInt(index2);
+            bufferInt = dataBoatTrim;
         }
-        int speedDataVal = parseInt(String.valueOf(buffer));
-
-//        return buffer.toString();
-        return speedDataVal;
-
+        return bufferInt;
     }
-
-//    public String getTrimData(String speed) {
-//        SQLiteDatabase db = helper.getWritableDatabase();
-//        String[] columns = {DatabaseConstants.BOAT_SPEED, DatabaseConstants.BOAT_TRIM};
-//
-//        String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";
-//        Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, null);
-//
-//        StringBuffer buffer = new StringBuffer();
-//
-//        while (cursor.moveToNext()) {
-//            int index1 = cursor.getColumnIndex(DatabaseConstants.BOAT_SPEED);
-//            int index2 = cursor.getColumnIndex(DatabaseConstants.BOAT_TRIM);
-//            String dataBoatSpeed = cursor.getString(index1);
-//            String dataBoatTrim = cursor.getString(index2);
-//            buffer.append(dataBoatTrim);
-//        }
-//        return buffer.toString();
-//    }
-
-
 }
