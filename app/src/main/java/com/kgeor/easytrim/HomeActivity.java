@@ -1,9 +1,14 @@
 package com.kgeor.easytrim;
 
+import android.content.Intent;
+import android.preference.PreferenceActivity;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,6 +55,29 @@ public class HomeActivity extends AppCompatActivity implements DiscreteScrollVie
     public void onClick(View v) {
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings_item:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment.class.getName());
+                intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflate = getMenuInflater();
+        inflate.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
 
     private void onItemChanged(DataItem item) {
         currentItemName.setText(item.getName());
