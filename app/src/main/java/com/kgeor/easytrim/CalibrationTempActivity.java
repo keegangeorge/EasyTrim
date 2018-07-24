@@ -35,7 +35,15 @@ public class CalibrationTempActivity extends AppCompatActivity implements DataCo
     }
 
     public void addBoatSpecs() {
-
+        // TODO FIX BUG! EXPLAINED BELOW:
+        /*
+         * When opening for first time and going straight to calibration view
+         * (without ever clicking on TrimView yet) and when "setting trim"
+         * the Trim Value is always stored in the database as '0'
+         *
+         * This is probably because the rotation sensor
+         * is not being implemented yet
+         */
         long id = db.insertData(currentSpeedValue, (int) boatTrim);
 
         if (id < 0) {
