@@ -7,32 +7,26 @@
     android:orientation="vertical"
     tools:context=".CalibrationTempActivity">
 
-    <com.anderson.dashboardview.view.DashboardView
-        android:id="@+id/speed_gauge_calibration"
-        android:layout_width="wrap_content"
+    <fragment
+        android:layout_margin="40dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="@string/gauge_title_speed"
-        app:centerCircleColor="@color/colorBlue"
-        app:endProgressColor="@color/colorBlueAlternate"
-        app:maxNumber="100"
-        app:startNumber="0"
-        app:startProgressColor="@color/colorBlue"
-        app:unit=" knots" />
+        android:name="com.kgeor.easytrim.Speedometer"
+        android:id="@+id/fragment"
+        />
 
-    <Button
-        android:id="@+id/calc_speed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:background="@color/colorBlue"
-        android:gravity="center"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:text="Start Speed"
-        android:textColor="@color/white" />
+    <!--<Button-->
+        <!--android:id="@+id/calc_speed"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:background="@color/colorBlue"-->
+        <!--android:gravity="center"-->
+        <!--android:paddingLeft="50dp"-->
+        <!--android:paddingRight="50dp"-->
+        <!--android:text="Start Speed"-->
+        <!--android:textColor="@color/white" />-->
 
     <Button
         android:id="@+id/set_trim"
