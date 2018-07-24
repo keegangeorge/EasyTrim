@@ -44,7 +44,7 @@ import java.text.NumberFormat;
  */
 public class MainActivity extends AppCompatActivity implements SensorEventListener, View.OnClickListener {
     // FIELDS //
-    public SpeedTask speedTask = new SpeedTask();
+//    public SpeedTask speedTask = new SpeedTask();
 
 
     // GUI //
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     } // onCreate() method end
 
     public void startSpeedCalc(View view) {
-        // SpeedTask speedTask = new SpeedTask();
+        SpeedTask speedTask = new SpeedTask();
         speedTask.execute();
     }
 
