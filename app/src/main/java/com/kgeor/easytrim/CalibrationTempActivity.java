@@ -25,29 +25,45 @@ public class CalibrationTempActivity extends AppCompatActivity implements DataCo
         submitTrim.setOnClickListener(this);
 
         db = new MyDatabase(this);
-        main.speedGauge = findViewById(R.id.speed_gauge_calibration);
-
 
     }
+
+
+    @Override
+    public void viewQueryResults(int speed) {
+        // TODO method stub
+    }
+
+    public void addBoatSpecs() {
+
+        long id = db.insertData(currentSpeedValue, (int) boatTrim);
+
+        if (id < 0) {
+            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.set_trim:
-                addBoatSpecs(submitTrim);
+                addBoatSpecs();
                 break;
         }
     }
 
-    public void addBoatSpecs(View view) {
-        long id = db.insertData(main.finalSpeed, (int) main.boatTrim);
-
-        if (id < 0) {
-            Toast.makeText(this, "Fail: Duplicate Speed", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public void addBoatSpecs(View view) {
+//        long id = db.insertData(main.finalSpeed, (int) main.boatTrim);
+//
+//        if (id < 0) {
+//            Toast.makeText(this, "Fail: Duplicate Speed", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
 }
