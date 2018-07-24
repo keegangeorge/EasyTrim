@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class CalibrationTempActivity extends AppCompatActivity implements View.OnClickListener {
+import static com.kgeor.easytrim.MainActivity.boatTrim;
+import static com.kgeor.easytrim.Speedometer.currentSpeedValue;
+
+public class CalibrationTempActivity extends AppCompatActivity implements DataCommunication, View.OnClickListener {
     // TODO add functionality to start calculating the trim values
     private Button submitTrim;
     static MyDatabase db;
-    MainActivity main;
 
 
     @Override
