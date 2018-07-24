@@ -42,7 +42,7 @@ import java.text.NumberFormat;
  * @author Keegan George
  * @version 1.0
  */
-public class MainActivity extends AppCompatActivity implements SensorEventListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements DataCommunication, SensorEventListener, View.OnClickListener {
     // FIELDS //
 //    public SpeedTask speedTask = new SpeedTask();
 
