@@ -45,7 +45,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
 
     // GPS & SENSOR RELATED //
     private LocationManager locationManager;
-    private LocationListener locationListener;
+    private LocationListener locationListener; // TODO unregister on application close
 //    public static final int SENSOR_DELAY_MICROS = 16 & 1000; // 16 ms
 
     // SHARED PREFERENCES //
