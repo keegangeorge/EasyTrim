@@ -8,74 +8,18 @@
     tools:context=".MainActivity">
 
     <fragment
-        android:layout_margin="40dp"
+        android:id="@+id/fragment"
+        android:name="com.kgeor.easytrim.Speedometer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.kgeor.easytrim.Speedometer"
-        android:id="@+id/fragment"
-        />
+        android:layout_margin="0dp" />
 
-
-    <!--<com.anderson.dashboardview.view.DashboardView-->
-        <!--android:id="@+id/speed_gauge"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:text="@string/gauge_title_speed"-->
-        <!--app:centerCircleColor="@color/colorBlue"-->
-        <!--app:endProgressColor="@color/colorBlueAlternate"-->
-        <!--app:maxNumber="100"-->
-        <!--app:startNumber="0"-->
-        <!--app:startProgressColor="@color/colorBlue"-->
-        <!--app:unit=" knots" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/btnSpeed"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginBottom="20dp"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:gravity="center"-->
-        <!--android:paddingLeft="10dp"-->
-        <!--android:paddingRight="10dp"-->
-        <!--android:text="Start Speed"-->
-        <!--android:textColor="@color/colorAccent" />-->
-
-
-
-    <!--<Button-->
-    <!--android:id="@+id/match_speed"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginStart="27dp"-->
-    <!--android:text="Does speed match?" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/button"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:gravity="center"-->
-    <!--android:text="Speed: "-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
-
-
-    <!--<Button-->
-    <!--android:id="@+id/submit_trim"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:onClick="addBoatSpecs"-->
-    <!--android:text="Submit" />-->
 
 
     <TextView
         android:id="@+id/pitch"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="Current Trim"
         android:textAllCaps="true"
@@ -87,20 +31,11 @@
         android:id="@+id/trim_up_or_down"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:gravity="center"
         android:text="Waiting"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold" />
-
-    <!--<Button-->
-    <!--android:id="@+id/calibrate_button"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:text="Calibrate" />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
@@ -122,5 +57,16 @@
 
 
     </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/trim_correct_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:lottie_fileName="done_button.json"
+        app:lottie_loop="false"
+        app:lottie_autoPlay="false"/>
+
+
 
 </LinearLayout>
