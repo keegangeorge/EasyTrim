@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_info_alternate"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_message"
+        android:shortcutId="calibration_shortcut"
+        android:shortcutLongLabel="@string/calib_shortcut_long_label"
+        android:shortcutShortLabel="@string/calib_shortcut_short_label">
+        <!-- Each one of these intents needs an android:action, even if you don't
+             do anything with it. Otherwise you're in for a crash! -->
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.kgeor.easytrim.CalibrationTempActivity"
+            android:targetPackage="com.kgeor.easytrim" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_boat"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_message"
+        android:shortcutId="trim_view_shortcut"
+        android:shortcutLongLabel="@string/trim_shortcut_long_label"
+        android:shortcutShortLabel="@string/trim_shortcut_short_label">
+        <!-- Each one of these intents needs an android:action, even if you don't
+             do anything with it. Otherwise you're in for a crash! -->
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.kgeor.easytrim.MainActivity"
+            android:targetPackage="com.kgeor.easytrim" />
+    </shortcut>
+
+</shortcuts>
