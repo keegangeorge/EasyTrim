@@ -8,6 +8,12 @@
     <string name="no">No</string>
     <string name="unavailable_service">Service Unavailable</string>
     <string name="standby">Standby</string>
+    <string name="shortcut_disabled_message">Shortcut is Unavailable</string>
+    <string name="trim_shortcut_long_label">Boat Trim View</string>
+    <string name="trim_shortcut_short_label">Trim View</string>
+    <string name="calib_shortcut_long_label">Calibrate Boat Trim</string>
+    <string name="calib_shortcut_short_label">Calibrate</string>
+
 
     <!-- Measurement Units -->
     <string name="units_title">Units</string>
@@ -52,4 +58,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
