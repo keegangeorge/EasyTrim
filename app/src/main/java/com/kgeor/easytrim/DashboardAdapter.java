@@ -27,8 +27,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.home_page_item, parent, false);
-
         return new ViewHolder(v);
+
     }
 
     @Override
@@ -44,14 +44,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         private ImageView image;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.card_image);
-            image.setOnClickListener(this);
+//            image.setOnClickListener(this);
+
 
         }
 
