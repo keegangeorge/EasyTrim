@@ -1,25 +1,13 @@
 package com.kgeor.easytrim;
 
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.anderson.dashboardview.view.DashboardView;
 
 import java.text.NumberFormat;
@@ -45,13 +34,14 @@ import java.text.NumberFormat;
 public class MainActivity extends AppCompatActivity implements DataCommunication, SensorEventListener, View.OnClickListener {
     // FIELDS //
 //    public SpeedTask speedTask = new SpeedTask();
+    LottieAnimationView trimCorrectAnimation;
 
 
     // GUI //
     private Button button;
     //    private Button calibrateButton;
     private Button submitTrim;
-//    protected Button btnSpeed;
+    //    protected Button btnSpeed;
     private TextView textView, trimTextView, trimStat;
     protected static DashboardView speedGauge;
 
@@ -106,9 +96,9 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         setContentView(R.layout.activity_main);
         Log.i(TAG, "onCreate: ");
         WindowManager mWindowManager = this.getWindow().getWindowManager();
-
         // GUI REFERENCES //
         button = findViewById(R.id.button);
+        trimCorrectAnimation = findViewById(R.id.trim_correct_animation);
 //        btnSpeed = findViewById(R.id.btnSpeed);
 //        calibrateButton = findViewById(R.id.calibrate_button);
 //        submitTrim = findViewById(R.id.submit_trim);
@@ -466,20 +456,35 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         int convertedTrim = (int) boatTrim;
         int queryResults = db.getSelectedData(speed);
         int trimResults = db.getTrimData(speed);
+        System.out.println("Database Speed: " + queryResults);
+        System.out.println("Actual Speed: " + speed);
 
         if (queryResults == speed) {
             System.out.println("Boat's Actual Trim: " + convertedTrim);
             System.out.println("Boat's Desired Trim: " + trimResults);
             if (convertedTrim > trimResults) {
+                trimCorrectAnimation.setAnimation("arrow-down.json");
+                trimCorrectAnimation.playAnimation();
                 trimStat.setText("Need less trim!");
             } else if (convertedTrim < trimResults) {
+                trimCorrectAnimation.setAnimation("arrow-up.json");
+                trimCorrectAnimation.playAnimation();
                 trimStat.setText("Need more trim!");
+
             } else if (convertedTrim == trimResults) {
                 trimStat.setText("Trim is correct!");
+                trimCorrectAnimation.setAnimation("done_button.json");
+                trimCorrectAnimation.playAnimation();
             }
+        } else if(queryResults > speed) {
+            trimStat.setText("DB GREATER THAT REAL");
+        } else if (queryResults < speed) {
+            trimStat.setText("DB LESS THAN REAL");
         } else {
+            trimCorrectAnimation.pauseAnimation();
             trimStat.setText("Need calibration");
         }
+
 
     }
 
