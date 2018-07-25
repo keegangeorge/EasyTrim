@@ -52,7 +52,10 @@ public class MyDatabase {
         String[] columns = {DatabaseConstants.BOAT_SPEED, DatabaseConstants.BOAT_TRIM};
 
         String selection = DatabaseConstants.BOAT_SPEED + "='" + speed + "'";
+//        String orderBySelection = "abs(Value1 - " + x + ")";
         Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, null);
+//        Cursor curse = db.query(DatabaseConstants.TABLE_NAME, columns, selection, null, null, null, orderBySelection, "1");
+
 
         int bufferInt = 0;
 
