@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yarolegovich.discretescrollview.DSVOrientation;
@@ -19,6 +20,7 @@ import com.yarolegovich.discretescrollview.InfiniteScrollAdapter;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
 import java.util.List;
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements
         DiscreteScrollView.OnItemChangedListener,
@@ -43,7 +45,10 @@ public class HomeActivity extends AppCompatActivity implements
 
         dashboard = HomeDashboard.get();
         data = dashboard.getData();
+
         itemPicker = findViewById(R.id.item_picker);
+        itemPicker.setOnClickListener(this); // TODO testing?
+
         itemPicker.setOrientation(DSVOrientation.HORIZONTAL);
         itemPicker.addOnItemChangedListener(this);
 
@@ -55,6 +60,7 @@ public class HomeActivity extends AppCompatActivity implements
                 .build());
 
         onItemChanged(data.get(0));
+
     }
 
     @Override
@@ -97,7 +103,7 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
-        int positionInDataSet = infiniteAdapter.getRealPosition(adapterPosition);
+        final int positionInDataSet = infiniteAdapter.getRealPosition(adapterPosition);
         onItemChanged(data.get(positionInDataSet));
     }
 
