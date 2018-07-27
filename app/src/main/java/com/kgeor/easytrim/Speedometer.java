@@ -136,7 +136,8 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-//        speedTask.cancel(true);
+        // Stop checking for location updates when out of any activity involving the speedometer
+        locationManager.removeUpdates(locationListener);
     }
 
     @Override
