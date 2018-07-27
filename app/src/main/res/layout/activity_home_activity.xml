@@ -28,9 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:fontFamily="sans-serif-light"
-        android:textColor="@android:color/black"
+        android:textAllCaps="true"
+        android:textColor="@color/colorAccent"
         android:textSize="20sp"
-        android:textStyle="bold"
         tools:text="Trim" />
 
     <Space
