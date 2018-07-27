@@ -5,17 +5,21 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import static com.kgeor.easytrim.MainActivity.boatTrim;
 import static com.kgeor.easytrim.Speedometer.currentSpeedValue;
 
 public class CalibrationTempActivity extends AppCompatActivity implements SensorEventListener, DataCommunication, View.OnClickListener {
-    private Button submitTrim;
+//    private Button submitTrim;
+    private LottieAnimationView submitTrim;
     static MyDatabase db;
 
     // SENSOR INFORMATION FOR DETECTING TRIM //
@@ -71,11 +75,18 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
 
     public void addBoatSpecs() {
         long id = db.insertData(currentSpeedValue, (int) boatTrim);
+        Snackbar failSnack = Snackbar.make(findViewById(R.id.calibration_linear),
+                R.string.snack_fail, Snackbar.LENGTH_SHORT);
+        failSnack.setAction(R.string.snack_fail_action, new MyTryAgainListener());
 
         if (id < 0) {
-            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+            failSnack.show();
+            submitTrim.setAnimation("done_button.json");
+            submitTrim.playAnimation();
         } else {
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.calibration_linear), "SUCCESS", Snackbar.LENGTH_SHORT).show();
+            submitTrim.setAnimation("done_button.json");
+            submitTrim.playAnimation();
         }
     }
 
@@ -125,6 +136,14 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
 //            Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
 //        }
 //    }
+
+    public class MyTryAgainListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            addBoatSpecs();
+        }
+    }
 
 
 }
