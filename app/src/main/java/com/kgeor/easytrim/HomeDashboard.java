@@ -19,7 +19,7 @@ public class HomeDashboard {
 
     public List<DataItem> getData() {
         return Arrays.asList(
-                new DataItem(1, "Trim View", R.drawable.default_placeholder_blue),
+                new DataItem(1, "Trim View", R.drawable.logostyle),
                 new DataItem(2, "Calibration", R.drawable.default_placeholder),
                 new DataItem(3, "Stats", R.drawable.default_placeholder));
     }
