@@ -1,10 +1,12 @@
 package com.kgeor.easytrim;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,8 +53,15 @@ public class TrimDataResults extends AppCompatActivity {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void viewDatabaseResults() {
         String data = db.getDataStylized(curUnits);
-        databaseResults.setText(Html.fromHtml(data));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            databaseResults.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            databaseResults.setText(Html.fromHtml(data));
+        }
     }
+
 }
