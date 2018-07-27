@@ -58,7 +58,8 @@ public class MyDatabase {
             int index = cursor.getInt(0);
             int speed = cursor.getInt(1);
             int trim = cursor.getInt(2);
-            buffer.append("<b>Speed:</b> " + speed + " " + units + " <b> Trim: </b> " + trim + "<br>");
+            String info = "<b>Speed:</b> " + speed + " " + units + "<br><b>&ensp;&nbsp;Trim: </b>" + trim + "&#176;<br>";
+            buffer.append(info + "<br>");
         }
 
         return buffer.toString();
