@@ -45,6 +45,8 @@
     </string-array>
     <string name="pref_title_calibrate">Calibrate</string>
     <string name="pref_body_calibrate">Recalibrate your boat\'s trim</string>
+    <string name="pref_title_database">Trim Data</string>
+    <string name="pref_body_database">View your calibrated trim data</string>
 
     <!-- Settings: About -->
     <string name="pref_category_title_about">About</string>
