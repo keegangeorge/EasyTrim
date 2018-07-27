@@ -99,12 +99,14 @@ public class Speedometer extends Fragment implements View.OnClickListener {
                 return;
             }
         }
+        startSpeedCalc();
 
     }
 
-    public void startSpeedCalc(View view) {
+    public void startSpeedCalc() {
         SpeedTask speedTask = new SpeedTask();
         speedTask.execute();
+        Toast.makeText(this.getActivity(), "Starting Calculation...", Toast.LENGTH_SHORT).show();
     }
 
     protected void detectUnits() {
@@ -129,6 +131,12 @@ public class Speedometer extends Fragment implements View.OnClickListener {
                 curUnits = "metersPerSecond";
                 break;
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        speedTask.cancel(true);
     }
 
     @Override
@@ -202,7 +210,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSpeed:
-                startSpeedCalc(btnSpeed);
+//                startSpeedCalc(btnSpeed);
                 Toast.makeText(this.getActivity(), "Starting Calculation...", Toast.LENGTH_SHORT).show();
                 break;
         }
