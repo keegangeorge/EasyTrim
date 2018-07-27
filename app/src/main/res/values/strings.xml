@@ -61,4 +61,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Snack bar Strings -->
+    <string name="snack_fail">Trim not recorded</string>
+    <string name="snack_fail_action">Try Again</string>
+
 </resources>
