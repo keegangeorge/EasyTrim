@@ -13,6 +13,7 @@ import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder> {
     private List<DataItem> data;
+    private RecyclerView parentRecycler;
 
     public DashboardAdapter(List<DataItem> data) {
         this.data = data;
@@ -21,6 +22,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        parentRecycler = recyclerView;
     }
 
     @Override
@@ -44,20 +46,24 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     }
 
 
-
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView image;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.card_image);
 //            image.setOnClickListener(this);
+            itemView.findViewById(R.id.container).setOnClickListener(this);
 
 
         }
 
         @Override
         public void onClick(View v) {
+            parentRecycler.smoothScrollToPosition(getAdapterPosition());
+            if (getLayoutPosition() == 1) {
+                System.out.println("#1 is Clicked!");
+            }
         }
     }
 
