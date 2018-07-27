@@ -113,7 +113,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
         unitsPref = sharedPref.getString("units_list", "NM");
 //        Toast.makeText(this.getActivity(), unitsPref, Toast.LENGTH_SHORT).show();
-        System.out.println("Units PreF: " + unitsPref);
+        System.out.println("Units Pref: " + unitsPref);
         System.out.println("Cur Pref: " + curUnits);
 
         switch (unitsPref) {
@@ -127,7 +127,6 @@ public class Speedometer extends Fragment implements View.OnClickListener {
                 curUnits = "milesPerHour";
                 break;
             case "ME":
-                System.out.println("When am I called?");
                 curUnits = "metersPerSecond";
                 break;
         }
