@@ -21,17 +21,18 @@
         app:startProgressColor="@color/colorBlue"
         app:unit=" knots" />
 
-    <Button
-        android:id="@+id/btnSpeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="Start Speed"
-        android:textColor="@color/colorAccent" />
+
+    <!--<Button-->
+        <!--android:id="@+id/btnSpeed"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:gravity="center"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:paddingRight="10dp"-->
+        <!--android:text="Start Speed"-->
+        <!--android:textColor="@color/colorAccent" />-->
 
 </LinearLayout>
