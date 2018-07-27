@@ -89,6 +89,28 @@ public class MyDatabase {
         return bufferInt;
     }
 
+    public int getCloseToData(int speed) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DatabaseConstants.BOAT_SPEED, DatabaseConstants.BOAT_TRIM};
+
+        Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns,
+                null, null, null, null,
+                "abs(" + DatabaseConstants.BOAT_SPEED + " - " + speed + ")", "1");
+
+        int bufferInt = 0;
+
+        while (cursor.moveToNext()) {
+            int index1 = cursor.getColumnIndex(DatabaseConstants.BOAT_SPEED);
+            int index2 = cursor.getColumnIndex(DatabaseConstants.BOAT_TRIM);
+
+            int dataBoatSpeed = cursor.getInt(index1);
+            int dataBoatTrim = cursor.getInt(index2);
+            bufferInt = dataBoatSpeed;
+        }
+
+        return bufferInt;
+    }
+
 
     public int getTrimData(int speed) {
         SQLiteDatabase db = helper.getWritableDatabase();

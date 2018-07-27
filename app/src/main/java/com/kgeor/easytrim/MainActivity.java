@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
     //    private Button calibrateButton;
     private Button submitTrim;
     //    protected Button btnSpeed;
-    private TextView textView, trimTextView, trimStat;
+    private TextView textView, trimTextView, trimStat, tempInfo;
     protected static DashboardView speedGauge;
 
     // SENSORS & GPS //
@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         // GUI REFERENCES //
         button = findViewById(R.id.button);
         trimCorrectAnimation = findViewById(R.id.trim_correct_animation);
+        tempInfo = findViewById(R.id.information);
         trimCorrectAnimation.setImageAssetsFolder("images/");
 //        btnSpeed = findViewById(R.id.btnSpeed);
 //        calibrateButton = findViewById(R.id.calibrate_button);
@@ -455,35 +456,59 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
     @Override
     public void viewQueryResults(int speed) {
         int convertedTrim = (int) boatTrim;
-        int queryResults = db.getSelectedData(speed);
+//        int queryResults = db.getSelectedData(speed);
+        int queryResults = db.getCloseToData(speed);
+
         int trimResults = db.getTrimData(speed);
+        System.out.println("Current Trim: " + boatTrim);
+        System.out.println("Trim for Speed: " + trimResults);
         System.out.println("Database Speed: " + queryResults);
         System.out.println("Actual Speed: " + speed);
+        tempInfo.setText("TRIM: " + convertedTrim + " TRIM FOR SPEED: " +
+                trimResults + " DB SPEED: " + queryResults + " REAL SPEED: " +
+                speed);
 
-        if (queryResults == speed) {
-            System.out.println("Boat's Actual Trim: " + convertedTrim);
-            System.out.println("Boat's Desired Trim: " + trimResults);
-            if (convertedTrim > trimResults) {
-                trimCorrectAnimation.setAnimation("trim-down.json");
-                trimCorrectAnimation.playAnimation();
-                trimStat.setText("Need less trim!");
-            } else if (convertedTrim < trimResults) {
-                trimCorrectAnimation.setAnimation("trim-up.json");
-                trimCorrectAnimation.playAnimation();
-                trimStat.setText("Need more trim!");
+//        if (queryResults == speed) {
+//            System.out.println("Boat's Actual Trim: " + convertedTrim);
+//            System.out.println("Boat's Desired Trim: " + trimResults);
+//            if (convertedTrim > trimResults) {
+//                trimCorrectAnimation.setAnimation("trim-down.json");
+//                trimCorrectAnimation.playAnimation();
+//                trimStat.setText("Need less trim!");
+//            } else if (convertedTrim < trimResults) {
+//                trimCorrectAnimation.setAnimation("trim-up.json");
+//                trimCorrectAnimation.playAnimation();
+//                trimStat.setText("Need more trim!");
+//
+//            } else if (convertedTrim == trimResults) {
+//                trimStat.setText("Trim is correct!");
+//                trimCorrectAnimation.setAnimation("steady.json");
+//                trimCorrectAnimation.playAnimation();
+//            }
+//        } else if(queryResults > speed) {
+//            trimStat.setText("DB GREATER THAT REAL");
+//        } else if (queryResults < speed) {
+//            trimStat.setText("DB LESS THAN REAL");
+//        } else {
+//            trimCorrectAnimation.pauseAnimation();
+//            trimStat.setText("Need calibration");
+//        }
 
-            } else if (convertedTrim == trimResults) {
-                trimStat.setText("Trim is correct!");
-                trimCorrectAnimation.setAnimation("steady.json");
-                trimCorrectAnimation.playAnimation();
-            }
-        } else if(queryResults > speed) {
-            trimStat.setText("DB GREATER THAT REAL");
-        } else if (queryResults < speed) {
-            trimStat.setText("DB LESS THAN REAL");
+        if (convertedTrim > trimResults) {
+            trimCorrectAnimation.setAnimation("trim-down.json");
+            trimCorrectAnimation.playAnimation();
+            trimStat.setText("Need less trim!");
+        } else if (convertedTrim < trimResults) {
+            trimCorrectAnimation.setAnimation("trim-up.json");
+            trimCorrectAnimation.playAnimation();
+            trimStat.setText("Need more trim!");
+
+        } else if (convertedTrim == trimResults) {
+            trimStat.setText("Trim is correct!");
+            trimCorrectAnimation.setAnimation("steady.json");
+            trimCorrectAnimation.playAnimation();
         } else {
             trimCorrectAnimation.pauseAnimation();
-            trimStat.setText("Need calibration");
         }
 
 

@@ -22,9 +22,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anderson.dashboardview.view.DashboardView;
+
+import org.w3c.dom.Text;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -39,7 +42,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     protected static int currentSpeedValue; // TODO remove this is temporary for testing
 
     // GUI //
-    protected Button btnSpeed;
+//    protected Button btnSpeed;
     protected DashboardView speedGauge;
     float multiplier;
 
@@ -74,11 +77,11 @@ public class Speedometer extends Fragment implements View.OnClickListener {
         dataCommunication = (DataCommunication)getActivity(); // init interface
 
         // GUI REFERENCES //
-        btnSpeed = getActivity().findViewById(R.id.btnSpeed);
+//        btnSpeed = getActivity().findViewById(R.id.btnSpeed);
         speedGauge = getActivity().findViewById(R.id.speed_gauge);
 
         // LISTENERS //
-        btnSpeed.setOnClickListener(this);
+//        btnSpeed.setOnClickListener(this);
 
         PreferenceManager.setDefaultValues(this.getActivity(), R.xml.pref_general, false);
         detectUnits();
@@ -209,12 +212,11 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnSpeed:
+//            case R.id.btnSpeed:
 //                startSpeedCalc(btnSpeed);
-                Toast.makeText(this.getActivity(), "Starting Calculation...", Toast.LENGTH_SHORT).show();
-                break;
+//                Toast.makeText(this.getActivity(), "Starting Calculation...", Toast.LENGTH_SHORT).show();
+//                break;
         }
-
     }
 
     public class SpeedTask extends AsyncTask<Void, Integer, Integer> {
@@ -230,6 +232,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
                 public void onLocationChanged(Location location) {
                     Log.i(TAG, "onLocationChanged: Method Start");
                     initSpeed = location.getSpeed();
+
 
                     switch (curUnits) {
                         case "knots":
@@ -293,6 +296,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
         @Override
         protected void onProgressUpdate(Integer... values) {
 //            textView.setText(R.string.detecting_speed);
+
         }
 
         @Override
