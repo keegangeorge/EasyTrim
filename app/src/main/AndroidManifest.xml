@@ -44,7 +44,11 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity android:name=".CalibrationTempActivity" />
-        <activity android:name=".TrimDataResults"></activity>
+        <activity android:name=".TrimDataResults">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kgeor.easytrim.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
