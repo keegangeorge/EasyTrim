@@ -46,6 +46,24 @@ public class MyDatabase {
         return buffer.toString();
     }
 
+    public String getDataStylized(String units) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DatabaseConstants.UID, DatabaseConstants.BOAT_SPEED,
+                DatabaseConstants.BOAT_TRIM};
+        Cursor cursor = db.query(DatabaseConstants.TABLE_NAME, columns, null, null, null, null, null);
+
+        StringBuffer buffer = new StringBuffer();
+
+        while (cursor.moveToNext()) {
+            int index = cursor.getInt(0);
+            int speed = cursor.getInt(1);
+            int trim = cursor.getInt(2);
+            buffer.append("<b>Speed:</b> " + speed + " " + units + " <b> Trim: </b> " + trim + "<br>");
+        }
+
+        return buffer.toString();
+    }
+
 
     public int getSelectedData(int speed) {
         SQLiteDatabase db = helper.getWritableDatabase();
