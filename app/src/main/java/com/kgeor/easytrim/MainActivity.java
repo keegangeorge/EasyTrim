@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         // GUI REFERENCES //
         button = findViewById(R.id.button);
         trimCorrectAnimation = findViewById(R.id.trim_correct_animation);
+        trimCorrectAnimation.setImageAssetsFolder("images/");
 //        btnSpeed = findViewById(R.id.btnSpeed);
 //        calibrateButton = findViewById(R.id.calibrate_button);
 //        submitTrim = findViewById(R.id.submit_trim);
@@ -463,17 +464,17 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
             System.out.println("Boat's Actual Trim: " + convertedTrim);
             System.out.println("Boat's Desired Trim: " + trimResults);
             if (convertedTrim > trimResults) {
-                trimCorrectAnimation.setAnimation("arrow-down.json");
+                trimCorrectAnimation.setAnimation("trim-down.json");
                 trimCorrectAnimation.playAnimation();
                 trimStat.setText("Need less trim!");
             } else if (convertedTrim < trimResults) {
-                trimCorrectAnimation.setAnimation("arrow-up.json");
+                trimCorrectAnimation.setAnimation("trim-up.json");
                 trimCorrectAnimation.playAnimation();
                 trimStat.setText("Need more trim!");
 
             } else if (convertedTrim == trimResults) {
                 trimStat.setText("Trim is correct!");
-                trimCorrectAnimation.setAnimation("done_button.json");
+                trimCorrectAnimation.setAnimation("steady.json");
                 trimCorrectAnimation.playAnimation();
             }
         } else if(queryResults > speed) {
