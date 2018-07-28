@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -38,7 +40,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         Glide.with(holder.itemView.getContext())
                 .load(data.get(position).getImage())
                 .into(holder.image);
+
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -52,8 +57,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.card_image);
-//            image.setOnClickListener(this);
             itemView.findViewById(R.id.container).setOnClickListener(this);
+
 
 
         }
@@ -61,11 +66,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         @Override
         public void onClick(View v) {
             parentRecycler.smoothScrollToPosition(getAdapterPosition());
-            if (getLayoutPosition() == 1) {
-                System.out.println("#1 is Clicked!");
-            }
         }
+
+
     }
-
-
 }
