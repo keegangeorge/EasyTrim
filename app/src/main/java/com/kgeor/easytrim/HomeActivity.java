@@ -11,7 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.yarolegovich.discretescrollview.DSVOrientation;
@@ -20,28 +21,34 @@ import com.yarolegovich.discretescrollview.InfiniteScrollAdapter;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
 import java.util.List;
-import java.util.Objects;
+
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 
 public class HomeActivity extends AppCompatActivity implements
-        DiscreteScrollView.OnItemChangedListener,
-        DiscreteScrollView.ScrollStateChangeListener,
+        DiscreteScrollView.OnItemChangedListener<DashboardAdapter.ViewHolder>,
+        DiscreteScrollView.ScrollStateChangeListener<DashboardAdapter.ViewHolder>,
         View.OnClickListener {
 
     private List<DataItem> data;
     private HomeDashboard dashboard;
-
+    protected static String cardItemState;
     private TextView currentItemName;
+    private Button button2;
     private DiscreteScrollView itemPicker;
     private InfiniteScrollAdapter infiniteAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        cardItemState = "Trim View";
         setContentView(R.layout.activity_home_activity);
 
         currentItemName = findViewById(R.id.item_name);
 
         currentItemName.setOnClickListener(this);
+
+        button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(this);
 
         dashboard = HomeDashboard.get();
         data = dashboard.getData();
@@ -51,6 +58,7 @@ public class HomeActivity extends AppCompatActivity implements
 
         itemPicker.setOrientation(DSVOrientation.HORIZONTAL);
         itemPicker.addOnItemChangedListener(this);
+        itemPicker.addScrollStateChangeListener(this);
 
         infiniteAdapter = InfiniteScrollAdapter.wrap(new DashboardAdapter(data));
         itemPicker.setAdapter(infiniteAdapter);
@@ -61,17 +69,38 @@ public class HomeActivity extends AppCompatActivity implements
 
         onItemChanged(data.get(0));
 
+//        if (itemPicker.getScrollState() == SCROLL_STATE_DRAGGING) {
+//            button2.setVisibility(View.INVISIBLE);
+//        } else {
+//            button2.setVisibility(View.VISIBLE);
+//        }
+
+
     }
 
     @Override
     public void onClick(View v) {
-        if (currentItemName.getText().toString().equals("Trim View")) {
-            Intent i = new Intent(HomeActivity.this, MainActivity.class);
-            startActivity(i);
-        } else if (currentItemName.getText().toString().equals("Calibration")) {
-            Intent i = new Intent(HomeActivity.this, CalibrationTempActivity.class);
-            startActivity(i);
+        switch (v.getId()) {
+            case R.id.button2:
+                int realPosition = infiniteAdapter.getRealPosition(itemPicker.getCurrentItem());
+                DataItem current = data.get(realPosition);
+                if (realPosition == 0) {
+                    System.out.println("Trim View Position?");
+                    Intent i = new Intent(HomeActivity.this, MainActivity.class);
+                    startActivity(i);
+                } else if (realPosition == 1) {
+                    System.out.println("Calibration Position?");
+                    Intent i = new Intent(HomeActivity.this, CalibrationTempActivity.class);
+                    startActivity(i);
+                } else if (realPosition == 2) {
+                    System.out.println("Stats Position");
+                } else {
+                    System.out.println("WHAT!");
+                }
+                break;
         }
+
+
     }
 
     @Override
@@ -99,26 +128,36 @@ public class HomeActivity extends AppCompatActivity implements
 
     private void onItemChanged(DataItem item) {
         currentItemName.setText(item.getName());
+        System.out.println("onItemChanged() called");
+
     }
 
     @Override
-    public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
+    public void onScrollStart(@NonNull DashboardAdapter.ViewHolder currentItemHolder, int adapterPosition) {
+//        button2.animate().alpha(0.0f).setDuration(200);
+        button2.animate().scaleX(0.5f).scaleY(0.5f).alpha(0.0f).setDuration(100);
+//        button2.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onScrollEnd(@NonNull DashboardAdapter.ViewHolder currentItemHolder, int adapterPosition) {
+
+    }
+
+    @Override
+    public void onScroll(float scrollPosition, int currentPosition, int newPosition, @Nullable DashboardAdapter.ViewHolder currentHolder, @Nullable DashboardAdapter.ViewHolder newCurrent) {
+    }
+
+    @Override
+    public void onCurrentItemChanged(@Nullable DashboardAdapter.ViewHolder viewHolder, int adapterPosition) {
         final int positionInDataSet = infiniteAdapter.getRealPosition(adapterPosition);
         onItemChanged(data.get(positionInDataSet));
-    }
 
-    @Override
-    public void onScrollStart(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
+        if (viewHolder != null) {
+//            button2.animate().alpha(1.0f).setDuration(200);
+//            button2.setVisibility(View.VISIBLE);
+            button2.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(150);
 
-    }
-
-    @Override
-    public void onScrollEnd(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
-
-    }
-
-    @Override
-    public void onScroll(float scrollPosition, int currentPosition, int newPosition, @Nullable RecyclerView.ViewHolder currentHolder, @Nullable RecyclerView.ViewHolder newCurrent) {
-
+        }
     }
 }
