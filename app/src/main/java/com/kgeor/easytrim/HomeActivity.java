@@ -93,7 +93,8 @@ public class HomeActivity extends AppCompatActivity implements
                     Intent i = new Intent(HomeActivity.this, CalibrationTempActivity.class);
                     startActivity(i);
                 } else if (realPosition == 2) {
-                    System.out.println("Stats Position");
+                    Intent i = new Intent(HomeActivity.this, Tutorial.class);
+                    startActivity(i);
                 } else {
                     System.out.println("WHAT!");
                 }
