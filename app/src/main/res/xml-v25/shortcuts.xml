@@ -3,7 +3,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_info_alternate"
+        android:icon="@drawable/calibration_shortcut"
         android:shortcutDisabledMessage="@string/shortcut_disabled_message"
         android:shortcutId="calibration_shortcut"
         android:shortcutLongLabel="@string/calib_shortcut_long_label"
@@ -18,7 +18,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_boat"
+        android:icon="@drawable/boat_trim_shortcut"
         android:shortcutDisabledMessage="@string/shortcut_disabled_message"
         android:shortcutId="trim_view_shortcut"
         android:shortcutLongLabel="@string/trim_shortcut_long_label"

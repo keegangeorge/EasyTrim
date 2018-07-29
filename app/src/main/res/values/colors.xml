@@ -2,10 +2,10 @@
 <resources>
     <!--<color name="colorPrimary">#042EF6</color>-->
     <!--<color name="colorPrimary">#6096DF</color>-->
-    <color name="colorPrimary">#2178ff</color>
+    <color name="colorPrimary">#0f47f7</color>
     <color name="colorPrimary2">#03a9f4</color>
     <!--<color name="colorPrimaryDark">#0225ca</color>-->
-    <color name="colorPrimaryDark">#164fa7</color>
+    <color name="colorPrimaryDark">#1231d5</color>
     <!--<color name="colorPrimaryDark">#4f7dbc</color>-->
     <color name="colorPrimaryDark2">#0084bf</color>
     <color name="colorAccent2">#ffab00</color>
@@ -15,4 +15,5 @@
     <color name="colorBlueAlternate">#58DFFF</color>
     <color name="colorGray">#DFDFDF</color>
     <color name="colorAccentGray">#bfbfbf</color>
+    <color name="onBoardingBG">#eef5fd</color>
 </resources>
