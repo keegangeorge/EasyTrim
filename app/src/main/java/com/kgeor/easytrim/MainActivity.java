@@ -214,45 +214,10 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.btnSpeed:
-//                startSpeedCalc(btnSpeed);
-//                Toast.makeText(this, "Speed Calculating...", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.calibrate_button:
-//                Intent i = new Intent(MainActivity.this, CalibrateActivity.class);
-//                startActivity(i);
-//                break;
-//            case R.id.submit_trim:
-//                addBoatSpecs(button);
-//                break;
 
-//            case R.id.match_speed:
-//                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-//                startActivity(intent);
-//                break;
         }
     }
 
-//    public void addBoatSpecs() {
-//        long id = db.insertData(finalSpeed, (int) boatTrim);
-//
-//        if (id < 0) {
-//            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-//    @Override
-//    public void addBoatSpecs(View view, int speed) {
-//        long id = db.insertData(speed, (int) boatTrim);
-//
-//        if (id < 0) {
-//            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 
     public void viewDatabaseResults(View view) {
         String data = db.getData();
