@@ -54,7 +54,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     // SHARED PREFERENCES //
     private String unitsPref;
     private SharedPreferences sharedPref;
-    private String curUnits = "knots";
+    protected static String curUnits = "knots";
 
     DataCommunication dataCommunication;
 
@@ -74,7 +74,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        dataCommunication = (DataCommunication)getActivity(); // init interface
+        dataCommunication = (DataCommunication) getActivity(); // init interface
 
         // GUI REFERENCES //
 //        btnSpeed = getActivity().findViewById(R.id.btnSpeed);
@@ -139,7 +139,10 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     public void onPause() {
         super.onPause();
         // Stop checking for location updates when out of any activity involving the speedometer
-        locationManager.removeUpdates(locationListener);
+        if (locationListener != null) {
+            locationManager.removeUpdates(locationListener);
+        }
+
     }
 
     @Override
@@ -197,6 +200,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
              */
 
             Log.i(TAG, "HERE_2");
+            Toast.makeText(this.getActivity(), "Permissions Required for Application", Toast.LENGTH_LONG).show();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{
@@ -287,7 +291,6 @@ public class Speedometer extends Fragment implements View.OnClickListener {
         }
 
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -306,8 +309,6 @@ public class Speedometer extends Fragment implements View.OnClickListener {
 
         }
     } // end Async inner class
-
-
 
 
 }
