@@ -162,29 +162,6 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
 
     }
 
-//    protected void detectUnits() {
-//        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-//        unitsPref = sharedPref.getString("units_list", "NM");
-//        Toast.makeText(this, unitsPref, Toast.LENGTH_SHORT).show();
-//        System.out.println("Units Pref: " + unitsPref);
-//        System.out.println("Cur Pref: " + curUnits);
-//
-//        switch (unitsPref) {
-//            case "NM":
-//                curUnits = "knots";
-//                break;
-//            case "KM":
-//                curUnits = "kilometersPerHour";
-//                break;
-//            case "MI":
-//                curUnits = "milesPerHour";
-//                break;
-//            case "ME":
-//                System.out.println("When am I called?");
-//                curUnits = "metersPerSecond";
-//                break;
-//        }
-//    }
 
     @Override
     protected void onResume() {
@@ -200,65 +177,6 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
     }
 
 
-//    /**
-//     * Recursive filter method for smoothing changes in speed
-//     * Retrieved from:
-//     * https://stackoverflow.com/questions/11900097/location-getspeed-update#answer-12152234
-//     *
-//     * @param prev Previous value of filter
-//     * @param curr New input value into filter
-//     * @return New filtered value
-//     */
-//    private float filter(final float prev, final float curr, final int ratio) {
-//        // If first time through, initialise digital filter with current values
-//        if (Float.isNaN(prev))
-//            return curr;
-//        // If current value is invalid, return previous filtered value
-//        if (Float.isNaN(curr))
-//            return prev;
-//        // Calculate new filtered value
-//        return (float) (curr / ratio + prev * (1.0 - 1.0 / ratio));
-//    }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        switch (requestCode) {
-//            case 10:
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    /*
-//                     * Occurs when permissions are granted by the user
-//                     */
-//                    Log.i(TAG, "onRequestPermissionsResult: PermissionGranted");
-//                    return;
-//                }
-//        }
-//    }
-
-//    private void configureLocationUpdates() {
-//        Log.i(TAG, "configureLocationUpdates: requestLocationUpdate");
-//        // params:   provider, minTime(ms), minDistance, locationListener
-//        try {
-//            Log.i(TAG, "HERE_1");
-//            locationManager.requestLocationUpdates("gps", 0, 0, locationListener);
-//        } catch (SecurityException e) {
-//
-//            /*
-//             * Occurs when permissions are denied on first app launch and then when user attempts to
-//             * use a feature that requires the permissions, this causes the permissions to pop up again
-//             */
-//
-//            Log.i(TAG, "HERE_2");
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                    requestPermissions(new String[]{
-//                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
-//                            Manifest.permission.INTERNET
-//                    }, 10);
-//                    return;
-//                }
-//            }
-//        }
-//    }
 
 
     @Override
@@ -341,122 +259,10 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         Toast.makeText(this, data, Toast.LENGTH_LONG).show();
     }
 
-//    public class SpeedTask extends AsyncTask<Void, Integer, Integer> {
-//
-//
-//        @Override
-//        protected Integer doInBackground(Void... params) {
-//            locationListener = new LocationListener() {
-//                float initSpeed = 0.0f;
-//                float convertedSpeed;
-//                float filteredSpeed;
-//
-//                @Override
-//                public void onLocationChanged(Location location) {
-//                    Log.i(TAG, "onLocationChanged: Method start");
-//
-//                    initSpeed = location.getSpeed();
-//
-//
-//                    switch (curUnits) {
-//                        case "knots":
-//                            multiplier = 1.94384f;
-//                            speedGauge.setUnit(" knots");
-//                            break;
-//                        case "kilometersPerHour":
-//                            multiplier = 3.6f;
-//                            speedGauge.setUnit(" km/h");
-//                            break;
-//                        case "milesPerHour":
-//                            multiplier = 2.23694f;
-//                            speedGauge.setUnit(" mph");
-//                            break;
-//                        case "metersPerSecond":
-//                            multiplier = 1f;
-//                            speedGauge.setUnit(" m/s");
-//                            break;
-//                        default:
-//                            multiplier = 1.94384f;
-//                            speedGauge.setUnit(" knots");
-//                            break;
-//                    }
-//
-//
-//                    System.out.println("Current Unit: " + curUnits + "  | Multiplier: " + multiplier);
-//
-//                    convertedSpeed = initSpeed * multiplier;
-//                    filteredSpeed = filter(finalSpeed, convertedSpeed, 2);
-//                    finalSpeed = (int) filteredSpeed;
-//                    speedGauge.setPercent(finalSpeed);
-//                    viewQueryResults();
-//
-//
-//                }
-//
-//                @Override
-//                public void onStatusChanged(String provider, int status, Bundle extras) {
-//
-//                }
-//
-//                @Override
-//                public void onProviderEnabled(String provider) {
-//                    textView.setText(R.string.standby);
-//                }
-//
-//                @Override
-//                public void onProviderDisabled(String provider) {
-//                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//                    startActivity(intent);
-//                    textView.setText(R.string.unavailable_service);
-//                }
-//            };
-//
-//            return finalSpeed;
-//
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected void onProgressUpdate(Integer... values) {
-//            textView.setText(R.string.detecting_speed);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Integer value) {
-//            configureLocationUpdates();
-//            speedGauge.setPercent(value);
-//        }
-//    } // end Async inner class
-
-//    public void viewQueryResults() {
-//        int convertedTrim = (int) boatTrim;
-//        int queryResults = db.getSelectedData(finalSpeed);
-//        int trimResults = db.getTrimData(finalSpeed);
-//
-//        if (queryResults == finalSpeed) {
-//            System.out.println("Boat's Actual Trim: " + convertedTrim);
-//            System.out.println("Boat's Desired Trim: " + trimResults);
-//            if (convertedTrim > trimResults) {
-//                trimStat.setText("Need less trim!");
-//            } else if (convertedTrim < trimResults) {
-//                trimStat.setText("Need more trim!");
-//            } else if (convertedTrim == trimResults) {
-//                trimStat.setText("Trim is correct!");
-//            }
-//        } else {
-//            trimStat.setText("Need calibration");
-//        }
-//    }
-
 
     @Override
     public void viewQueryResults(int speed) {
         int convertedTrim = (int) boatTrim;
-//        int queryResults = db.getSelectedData(speed);
         int queryResults = db.getCloseToData(speed);
 
         int trimResults = db.getTrimData(speed);
