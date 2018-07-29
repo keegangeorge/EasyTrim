@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.nio.IntBuffer;
 
+import static com.kgeor.easytrim.Speedometer.TAG;
 import static java.lang.Integer.parseInt;
 
 public class MyDatabase {
@@ -89,6 +91,35 @@ public class MyDatabase {
         return bufferInt;
     }
 
+    public boolean hasObject(String speed) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String selectString = "SELECT * FROM " + DatabaseConstants.TABLE_NAME + " WHERE " + DatabaseConstants.BOAT_SPEED + " =?";
+
+        // Add the String you are searching by here.
+        // Put it in an array to avoid an unrecognized token error
+        Cursor cursor = db.rawQuery(selectString, new String[] {speed});
+
+        boolean hasObject = false;
+        if(cursor.moveToFirst()){
+            hasObject = true;
+
+            //region if you had multiple records to check for, use this region.
+
+            int count = 0;
+            while(cursor.moveToNext()){
+                count++;
+            }
+            //here, count is records found
+            Log.d("DB", String.format("%d records found", count));
+
+            //endregion
+
+        }
+
+        cursor.close();          // Dont forget to close your cursor
+        db.close();              //AND your Database!
+        return hasObject;
+    }
     public int getCloseToData(int speed) {
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] columns = {DatabaseConstants.BOAT_SPEED, DatabaseConstants.BOAT_TRIM};
