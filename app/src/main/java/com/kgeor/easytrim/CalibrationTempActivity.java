@@ -1,15 +1,18 @@
 package com.kgeor.easytrim;
 
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -18,9 +21,10 @@ import static com.kgeor.easytrim.MainActivity.boatTrim;
 import static com.kgeor.easytrim.Speedometer.currentSpeedValue;
 
 public class CalibrationTempActivity extends AppCompatActivity implements SensorEventListener, DataCommunication, View.OnClickListener {
-//    private Button submitTrim;
+    //    private Button submitTrim;
     private LottieAnimationView submitTrim;
     static MyDatabase db;
+    boolean keepSearching;
 
     // SENSOR INFORMATION FOR DETECTING TRIM //
     private static final int SENSOR_DELAY_MICROS = 16 * 1000; // 16 ms
@@ -29,12 +33,20 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
     private Sensor mRotationSensor;
 
 
+    // GUI //
+    private TextView targetSpeed;
+    private int maxSearchSpeed = 20;
+    // TODO allow max search speed to be set by the user
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration_temp);
+
+        keepSearching = true;
         submitTrim = findViewById(R.id.set_trim);
+        targetSpeed = findViewById(R.id.calibration_target_speed);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         // can be null if the sensor hardware is not available
@@ -45,6 +57,7 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
 
         db = new MyDatabase(this);
 
+
     }
 
     @Override
@@ -54,9 +67,49 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
 
     }
 
+    protected void checkTargetSpeed() {
+        String units;
+        switch (Speedometer.curUnits) {
+            case "knots":
+                units = " knots";
+                break;
+            case "kilometersPerHour":
+                units = " km/h";
+                break;
+            case "milesPerHour":
+                units = " mph";
+                break;
+            case "metersPerSecond":
+                units = " m/s";
+                break;
+            default:
+                units = " knots";
+                break;
+        }
+        if (keepSearching) {
+            // TODO change i+= 5 to i+= 10 (5 for testing purposes)
+            for (int i = 0; i < maxSearchSpeed; i += 5) {
+                System.out.println("For-loop is called");
+                boolean isThere = db.hasObject(String.valueOf(i));
+
+                if (!isThere) {
+                    submitTrim.setVisibility(View.VISIBLE); // TODO change to based on speed
+                    targetSpeed.setText(i + units);
+                    keepSearching = false;
+                    break;
+                }
+                System.out.println("HAS? " + isThere);
+
+            }
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+        System.out.println("CALIBRATION onRESUME() CALLED");
+        checkTargetSpeed();
+
 
         if (mRotationSensor == null) {
             Toast.makeText(this, "Rotation Sensor Unavailable", Toast.LENGTH_LONG).show();
@@ -65,7 +118,6 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
         mSensorManager.registerListener(this, mRotationSensor, SENSOR_DELAY_MICROS);
 
     }
-
 
 
     @Override
@@ -84,9 +136,11 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
             submitTrim.setAnimation("done_button.json");
             submitTrim.playAnimation();
         } else {
-            Snackbar.make(findViewById(R.id.calibration_linear), "SUCCESS", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.calibration_linear), "Speed: " + targetSpeed.getText() + " Calibrated", Snackbar.LENGTH_LONG).show();
             submitTrim.setAnimation("done_button.json");
             submitTrim.playAnimation();
+            keepSearching = true;
+            checkTargetSpeed();
         }
     }
 
@@ -105,6 +159,7 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
         if (event.sensor == mRotationSensor) {
             updateOrientation(event.values);
         }
+
     }
 
     @Override
@@ -126,16 +181,6 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
 
 
     }
-
-//    public void addBoatSpecs(View view) {
-//        long id = db.insertData(main.finalSpeed, (int) main.boatTrim);
-//
-//        if (id < 0) {
-//            Toast.makeText(this, "Fail: Duplicate Speed", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 
     public class MyTryAgainListener implements View.OnClickListener {
 
