@@ -8,50 +8,55 @@
     android:orientation="vertical"
     tools:context=".CalibrationTempActivity">
 
-    <fragment
-        android:layout_margin="40dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.kgeor.easytrim.Speedometer"
-        android:id="@+id/fragment"
-        />
+        android:layout_height="match_parent">
 
-    <!--<Button-->
-        <!--android:id="@+id/calc_speed"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--android:background="@color/colorBlue"-->
-        <!--android:gravity="center"-->
-        <!--android:paddingLeft="50dp"-->
-        <!--android:paddingRight="50dp"-->
-        <!--android:text="Start Speed"-->
-        <!--android:textColor="@color/white" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/set_trim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:lottie_autoPlay="false"
-        app:lottie_fileName="done_button.json"
-        app:lottie_loop="false" />
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Target Speed to Calibrate:"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="center"/>
 
-    <!--<Button-->
-        <!--android:id="@+id/set_trim"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:gravity="center"-->
-        <!--android:paddingLeft="65dp"-->
-        <!--android:paddingRight="65dp"-->
-        <!--android:text="Set Trim"-->
-        <!--android:textColor="@color/white" />-->
+            <TextView
+                android:id="@+id/calibration_target_speed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:text="pending request"
+                android:gravity="center"/>
 
 
+            <fragment
+                android:id="@+id/fragment"
+                android:name="com.kgeor.easytrim.Speedometer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp" />
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/set_trim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="false"
+                app:lottie_fileName="done_button.json"
+                app:lottie_loop="false" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>
