@@ -1,6 +1,8 @@
 package com.kgeor.easytrim;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
 
 import java.util.List;
 
@@ -51,7 +54,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, DiscreteScrollView.ScrollStateChangeListener {
         private ImageView image;
 
         public ViewHolder(View itemView) {
@@ -69,5 +72,19 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         }
 
 
+        @Override
+        public void onScrollStart(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
+            image.animate().translationY(50f).setDuration(100);
+        }
+
+        @Override
+        public void onScrollEnd(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
+            image.animate().translationY(-50f).setDuration(100);
+        }
+
+        @Override
+        public void onScroll(float scrollPosition, int currentPosition, int newPosition, @Nullable RecyclerView.ViewHolder currentHolder, @Nullable RecyclerView.ViewHolder newCurrent) {
+
+        }
     }
 }
