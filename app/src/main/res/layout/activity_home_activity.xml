@@ -29,7 +29,7 @@
         android:layout_gravity="center_horizontal"
         android:fontFamily="sans-serif-light"
         android:textAllCaps="true"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         tools:text="Trim" />
 
