@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
 
 
     // GUI //
-    private Button button;
+//    private Button button;
     //    private Button calibrateButton;
     private Button submitTrim;
     //    protected Button btnSpeed;
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         Log.i(TAG, "onCreate: ");
         WindowManager mWindowManager = this.getWindow().getWindowManager();
         // GUI REFERENCES //
-        button = findViewById(R.id.button);
+//        button = findViewById(R.id.button);
         trimCorrectAnimation = findViewById(R.id.trim_correct_animation);
         tempInfo = findViewById(R.id.information);
         trimCorrectAnimation.setImageAssetsFolder("images/");
@@ -266,17 +266,18 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
 //        }
 
         if (convertedTrim > trimResults) {
-            trimCorrectAnimation.setAnimation("trim-down.json");
+//            trimCorrectAnimation.setAnimation("trim-down.json");
+            trimCorrectAnimation.setAnimation("DECREASE_TRIM.json");
             trimCorrectAnimation.playAnimation();
             trimStat.setText("Need less trim!");
         } else if (convertedTrim < trimResults) {
-            trimCorrectAnimation.setAnimation("trim-up.json");
+            trimCorrectAnimation.setAnimation("INCREASE_TRIM.json");
             trimCorrectAnimation.playAnimation();
             trimStat.setText("Need more trim!");
 
         } else if (convertedTrim == trimResults) {
             trimStat.setText("Trim is correct!");
-            trimCorrectAnimation.setAnimation("steady.json");
+            trimCorrectAnimation.setAnimation("NORMAL_TRIM.json");
             trimCorrectAnimation.playAnimation();
         } else {
             trimCorrectAnimation.pauseAnimation();
