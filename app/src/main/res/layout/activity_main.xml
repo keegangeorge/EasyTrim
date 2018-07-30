@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -44,6 +45,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/information"
                 android:layout_width="match_parent"
@@ -62,28 +64,36 @@
                 android:orientation="vertical">
 
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="400dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center"
-                    android:background="@color/colorAccent"
-                    android:gravity="center"
-                    android:onClick="viewDatabaseResults"
-                    android:text="VIEW DATA"
-                    android:textColor="@color/white" />
+                <!--<Button-->
+                    <!--android:id="@+id/button"-->
+                    <!--android:layout_width="400dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_horizontal|center"-->
+                    <!--android:background="@color/colorAccent"-->
+                    <!--android:gravity="center"-->
+                    <!--android:onClick="viewDatabaseResults"-->
+                    <!--android:text="VIEW DATA"-->
+                    <!--android:textColor="@color/white" />-->
 
 
             </LinearLayout>
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/trim_correct_animation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:lottie_autoPlay="false"
-                app:lottie_fileName="steady.json"
-                app:lottie_loop="false" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:paddingBottom="10dp"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content">
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/trim_correct_animation"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="LOADING_GPS.json"
+                    app:lottie_loop="true" />
+            </FrameLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
