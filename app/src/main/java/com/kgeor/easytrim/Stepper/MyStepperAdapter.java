@@ -1,4 +1,4 @@
-package com.kgeor.easytrim;
+package com.kgeor.easytrim.Stepper;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,8 +6,8 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 
-import com.kgeor.easytrim.R;
-import com.kgeor.easytrim.StepFragmentWelcome;
+import com.kgeor.easytrim.Stepper.StepperDetails;
+import com.kgeor.easytrim.Stepper.StepperMountDevice;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.viewmodel.StepViewModel;
@@ -24,13 +24,13 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter {
     public Step createStep(int position) {
         switch (position){
             case 0:
-                final StepFragmentWelcome step1 = new StepFragmentWelcome();
+                final StepperDetails step1 = new StepperDetails();
                 Bundle b1 = new Bundle();
                 b1.putInt(CURRENT_STEP_POSITION_KEY, position);
                 step1.setArguments(b1);
                 return step1;
             case 1:
-                final StepFragmentBoatDetails step2 = new StepFragmentBoatDetails();
+                final StepperMountDevice step2 = new StepperMountDevice();
                 Bundle b2 = new Bundle();
                 b2.putInt(CURRENT_STEP_POSITION_KEY, position);
                 step2.setArguments(b2);

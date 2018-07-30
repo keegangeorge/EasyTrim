@@ -1,4 +1,4 @@
-package com.kgeor.easytrim;
+package com.kgeor.easytrim.Stepper;
 
 
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kgeor.easytrim.R;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
@@ -16,11 +17,12 @@ import com.stepstone.stepper.VerificationError;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StepFragmentBoatDetails extends Fragment implements Step {
+public class StepperDetails extends Fragment implements Step {
 
 
-    public StepFragmentBoatDetails() {
+    public StepperDetails() {
         // Required empty public constructor
+
     }
 
 
@@ -28,7 +30,7 @@ public class StepFragmentBoatDetails extends Fragment implements Step {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_step_fragment_boat_details, container, false);
+        return inflater.inflate(R.layout.fragment_step_fragment_welcome, container, false);
     }
 
     @Nullable
