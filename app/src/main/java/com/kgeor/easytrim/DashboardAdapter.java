@@ -54,7 +54,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, DiscreteScrollView.ScrollStateChangeListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView image;
 
         public ViewHolder(View itemView) {
@@ -71,20 +71,5 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
             parentRecycler.smoothScrollToPosition(getAdapterPosition());
         }
 
-
-        @Override
-        public void onScrollStart(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
-            image.animate().translationY(50f).setDuration(100);
-        }
-
-        @Override
-        public void onScrollEnd(@NonNull RecyclerView.ViewHolder currentItemHolder, int adapterPosition) {
-            image.animate().translationY(-50f).setDuration(100);
-        }
-
-        @Override
-        public void onScroll(float scrollPosition, int currentPosition, int newPosition, @Nullable RecyclerView.ViewHolder currentHolder, @Nullable RecyclerView.ViewHolder newCurrent) {
-
-        }
     }
 }
