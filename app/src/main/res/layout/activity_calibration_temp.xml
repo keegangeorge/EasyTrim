@@ -40,8 +40,7 @@
                 android:id="@+id/fragment"
                 android:name="com.kgeor.easytrim.Speedometer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp" />
+                android:layout_height="wrap_content" />
 
 
             <com.airbnb.lottie.LottieAnimationView
@@ -53,6 +52,20 @@
                 app:lottie_autoPlay="false"
                 app:lottie_fileName="done_button.json"
                 app:lottie_loop="false" />
+
+            <Button
+                android:id="@+id/calibration_complete"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complete"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/colorPrimary"/>
 
         </LinearLayout>
 
