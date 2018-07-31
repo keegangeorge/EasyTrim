@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,8 +100,6 @@ public class StepperDetails extends Fragment implements Step, BlockingStep, Adap
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -126,8 +125,14 @@ public class StepperDetails extends Fragment implements Step, BlockingStep, Adap
 
     @Override
     public void onNextClicked(final StepperLayout.OnNextClickedCallback callback) {
-        getMaxSpeedInput();
-        callback.goToNextStep();
+
+        if (TextUtils.isEmpty(maxSpeedInput.getText())) {
+            Toast.makeText(this.getActivity(), "Max Speed Required!", Toast.LENGTH_SHORT).show();
+        } else {
+            getMaxSpeedInput();
+            callback.goToNextStep();
+        }
+
     }
 
     @Override
