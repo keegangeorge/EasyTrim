@@ -17,7 +17,7 @@
             android:title="@string/pref_title_calibrate">
             <intent
                 android:action="android.intent.action.MAIN"
-                android:targetClass="com.kgeor.easytrim.CalibrationTempActivity"
+                android:targetClass="com.kgeor.easytrim.Tutorial"
                 android:targetPackage="com.kgeor.easytrim" />
         </Preference>
 
