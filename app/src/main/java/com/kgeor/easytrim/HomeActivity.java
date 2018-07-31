@@ -20,16 +20,20 @@ import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
 import java.util.List;
 
+/**
+ * Activity responsible for the main menu which showcases a swipe-able card view
+ */
 public class HomeActivity extends AppCompatActivity implements
         DiscreteScrollView.OnItemChangedListener<DashboardAdapter.ViewHolder>,
         DiscreteScrollView.ScrollStateChangeListener<DashboardAdapter.ViewHolder>,
         View.OnClickListener {
 
+    // FIELDS //
     private List<DataItem> data;
     private HomeDashboard dashboard;
     protected static String cardItemState;
     private TextView currentItemName;
-    private Button button2;
+    private Button btnView;
     private DiscreteScrollView itemPicker;
     private InfiniteScrollAdapter infiniteAdapter;
 
@@ -41,19 +45,22 @@ public class HomeActivity extends AppCompatActivity implements
 
         cardItemState = "Trim View";
 
+        // LINK XML TO JAVA //
         currentItemName = findViewById(R.id.item_name);
+        btnView = findViewById(R.id.btn_card_view);
+        itemPicker = findViewById(R.id.item_picker);
 
+
+        // SET LISTENERS //
         currentItemName.setOnClickListener(this);
+        btnView.setOnClickListener(this);
+        itemPicker.setOnClickListener(this);
 
-        button2 = findViewById(R.id.button2);
-        button2.setOnClickListener(this);
-
+        // DATA //
         dashboard = HomeDashboard.get();
         data = dashboard.getData();
 
-        itemPicker = findViewById(R.id.item_picker);
-        itemPicker.setOnClickListener(this); // TODO testing?
-
+        // DISCRETE SCROLL VIEW //
         itemPicker.setOrientation(DSVOrientation.HORIZONTAL);
         itemPicker.addOnItemChangedListener(this);
         itemPicker.addScrollStateChangeListener(this);
@@ -64,14 +71,13 @@ public class HomeActivity extends AppCompatActivity implements
         itemPicker.setItemTransformer(new ScaleTransformer.Builder()
                 .setMinScale(0.8f)
                 .build());
-
         onItemChanged(data.get(0));
-    }
+    } // onCreate method end
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button2:
+            case R.id.btn_card_view:
                 int realPosition = infiniteAdapter.getRealPosition(itemPicker.getCurrentItem());
                 DataItem current = data.get(realPosition);
                 if (realPosition == 0) {
@@ -91,18 +97,23 @@ public class HomeActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Method responsible for what occurs on a first launch of the application
+     * Will cause the WelcomeActivity to be opened, prompting user for setup.
+     */
     private void firstAppLaunch() {
+        // Get reference to shared preference if this is the user's first run of the app
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
 
         if (isFirstRun) {
-            //show start activity
+            // If it is the first run, open the WelcomeActivity
             startActivity(new Intent(HomeActivity.this, WelcomeActivity.class));
         }
 
+        // Make the first run boolean false
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putBoolean("isFirstRun", false).apply();
-
     }
 
     @Override
@@ -119,7 +130,6 @@ public class HomeActivity extends AppCompatActivity implements
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflate = getMenuInflater();
@@ -127,18 +137,14 @@ public class HomeActivity extends AppCompatActivity implements
         return true;
     }
 
-
     private void onItemChanged(DataItem item) {
         currentItemName.setText(item.getName());
-        System.out.println("onItemChanged() called");
-
     }
 
     @Override
     public void onScrollStart(@NonNull DashboardAdapter.ViewHolder currentItemHolder, int adapterPosition) {
-//        button2.animate().alpha(0.0f).setDuration(200);
-        button2.animate().scaleX(0.5f).scaleY(0.5f).alpha(0.0f).setDuration(100);
-//        button2.setVisibility(View.INVISIBLE);
+        // When scrolling begins, scale down and hide the button
+        btnView.animate().scaleX(0.5f).scaleY(0.5f).alpha(0.0f).setDuration(100);
     }
 
     @Override
@@ -156,10 +162,9 @@ public class HomeActivity extends AppCompatActivity implements
         onItemChanged(data.get(positionInDataSet));
 
         if (viewHolder != null) {
-//            button2.animate().alpha(1.0f).setDuration(200);
-//            button2.setVisibility(View.VISIBLE);
-            button2.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(150);
-
+            // When scrolling stops, scale the button back up and un-hide it
+            btnView.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(150);
         }
     }
-}
+
+} // HomeActivity end

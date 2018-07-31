@@ -14,26 +14,26 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Target Speed to Calibrate:"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="@string/targetSpeed_title"
                 android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:gravity="center"/>
+                android:textColor="@color/colorPrimaryDark" />
 
             <TextView
                 android:id="@+id/calibration_target_speed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/pending_targetSpeed"
                 android:textAppearance="@android:style/TextAppearance.Large"
-                android:text="pending request"
-                android:gravity="center"/>
+                android:textColor="@color/colorPrimary" />
 
 
             <fragment
@@ -47,25 +47,25 @@
                 android:id="@+id/set_trim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
                 android:layout_gravity="center"
+                android:visibility="invisible"
                 app:lottie_autoPlay="false"
                 app:lottie_fileName="BTN_SUCCESS.json"
                 app:lottie_loop="false" />
 
             <Button
                 android:id="@+id/calibration_complete"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="5dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Complete"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/colorPrimary"/>
+                android:layout_gravity="bottom"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:paddingBottom="20dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="20dp"
+                android:text="@string/calibration_complete"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

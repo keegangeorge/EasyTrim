@@ -48,7 +48,7 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_card_view"
             android:layout_width="215dp"
             android:layout_height="60dp"
             android:layout_gravity="center|bottom"

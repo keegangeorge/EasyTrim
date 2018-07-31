@@ -2,9 +2,6 @@ package com.kgeor.easytrim;
 
 /**
  * DataItem class to get data values for recycler view
- *
- * @author Keegan George
- * @version 1.0
  */
 public class DataItem {
     // FIELDS //
@@ -20,6 +17,7 @@ public class DataItem {
         this.image = image;
     }
 
+    // METHODS //
     public int getId() {
         return id;
     }

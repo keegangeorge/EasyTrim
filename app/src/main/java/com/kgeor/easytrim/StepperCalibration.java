@@ -15,6 +15,7 @@ import com.stepstone.stepper.VerificationError;
 
 
 /**
+ * Fragment responsible for the calibration information in the stepper
  * A simple {@link Fragment} subclass.
  */
 public class StepperCalibration extends Fragment implements Step, View.OnClickListener {

@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+/**
+ * SQLite helped class responsible for initializing, upgrading, or other database related opearations
+ */
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;

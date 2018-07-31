@@ -10,40 +10,38 @@ import android.preference.PreferenceActivity;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.anderson.dashboardview.view.DashboardView;
 
-import java.text.NumberFormat;
-
 
 /**
+ * MainActivity class responsible for the primary activity - trim view, in which the user can
+ * view a speedometer showcasing their current speed, as well as an indicator prompting the user
+ * whether to increase or decrease the trim value
+ *
  * @author Keegan George
  * @version 1.0
  */
-public class MainActivity extends AppCompatActivity implements DataCommunication, SensorEventListener {
-    // FIELDS //
-    LottieAnimationView trimCorrectAnimation;
+public class MainActivity extends AppCompatActivity
+        implements DataCommunication, SensorEventListener {
 
+    // FIELDS //
+    private static final String TAG = MainActivity.class.getSimpleName();
+    LottieAnimationView trimCorrectAnimation;
+    protected static float boatTrim = 0;
 
     // GUI //
     protected static DashboardView speedGauge;
 
     // SENSORS & GPS //
-    private static final String TAG = MainActivity.class.getSimpleName();
     private static final int SENSOR_DELAY_MICROS = 16 * 1000; // 16 ms
-    protected static float boatTrim = 0;
-
     private SensorManager mSensorManager;
     @Nullable
     private Sensor mRotationSensor;
@@ -52,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
     static MyDatabase db;
 
 
+    /**
+     * Method responsible for what occurs when the settings items are clicked.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -66,6 +67,12 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         }
     }
 
+    /**
+     * Method responsible for inflating the settings menu
+     *
+     * @param menu the settings menu to be inflated
+     * @return true if the menu is inflated
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflate = getMenuInflater();
@@ -77,9 +84,10 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i(TAG, "onCreate: ");
-        WindowManager mWindowManager = this.getWindow().getWindowManager();
+
+        // Log.i(TAG, "onCreate: ");
         // GUI REFERENCES //
+        WindowManager mWindowManager = this.getWindow().getWindowManager();
         trimCorrectAnimation = findViewById(R.id.trim_correct_animation);
         trimCorrectAnimation.setImageAssetsFolder("images/");
         speedGauge = findViewById(R.id.speed_gauge);
@@ -89,30 +97,28 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
 
         // SENSORS & GPS //
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
         // can be null if the sensor hardware is not available
         mRotationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-    }
+    } // onCreate method end
 
     @Override
     protected void onPause() {
         super.onPause();
+        // Release the sensor early
         mSensorManager.unregisterListener(this);
     }
 
-
     @Override
     protected void onResume() {
-        Log.i(TAG, "onResume: ");
+        // Log.i(TAG, "onResume: ");
         super.onResume();
 
+        // Attempts to register the rotation sensor if it is available on the device
         if (mRotationSensor == null) {
             Toast.makeText(this, "Rotation Sensor Unavailable", Toast.LENGTH_LONG).show();
         }
-
         mSensorManager.registerListener(this, mRotationSensor, SENSOR_DELAY_MICROS);
     }
-
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -126,6 +132,10 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         // TODO Auto-generated method stub
     }
 
+    /**
+     * Method responsible for getting the rotation values from the rotation sensors
+     * and updating it to the current values. It also converts those values to degrees.
+     */
     @SuppressWarnings("SuspiciousNameCombination")
     private void updateOrientation(float[] rotationVector) {
         float[] rotationMatrix = new float[9];
@@ -137,10 +147,15 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
 
         // Convert radians to degrees
         boatTrim = orientation[1] * -57.295779513f;
-
-
     }
 
+    /**
+     * Method responsible for comparing the current speed value with
+     * the value in the database to check whether or not to increase
+     * or decrease the boat's trim for that specific speed.
+     *
+     * @param speed the current speed the boat is at
+     */
     @Override
     public void viewQueryResults(int speed) {
         int convertedTrim = (int) boatTrim;
@@ -164,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
             trimCorrectAnimation.pauseAnimation();
         }
     }
+
 } // MainActivity class end
 
 

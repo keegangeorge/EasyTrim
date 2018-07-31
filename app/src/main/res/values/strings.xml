@@ -78,6 +78,9 @@
     <string name="current_condition_stat">CURRENT CONDITION</string>
     <string name="units_stat">UNITS</string>
     <string name="top_speed_stat">TOP SPEED</string>
+    <string name="calibration_complete">Calibration Complete</string>
+    <string name="pending_targetSpeed">Pending Request</string>
+    <string name="targetSpeed_title">Target Speed to Calibrate:</string>
 
     <string-array name="details_units">
         <item>Nautical Miles</item>

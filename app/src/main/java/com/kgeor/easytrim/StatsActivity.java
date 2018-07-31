@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * StatsActivity class responsible for displaying statistics to the user
+ */
 public class StatsActivity extends AppCompatActivity implements View.OnClickListener {
     // GUI //
     TextView topSpeed, measurementUnit, condition;
@@ -27,12 +30,14 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
         // SET LISTENERS //
         viewData.setOnClickListener(this);
 
+        // SET TEXT VALUES //
         topSpeed.setText(Integer.toString(Speedometer.topSpeed) + " " + Speedometer.curUnits);
         measurementUnit.setText(Speedometer.curUnits);
     }
 
     @Override
     public void onClick(View v) {
+        // OPEN TRIM DATA RESULTS UPON BUTTON PRESS //
         Intent i = new Intent(StatsActivity.this, TrimDataResults.class);
         startActivity(i);
     }

@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class responsible for containing data relating to the HomeActivity's dashboard
+ */
 public class HomeDashboard {
     public static final String STORAGE = "dashboard";
 

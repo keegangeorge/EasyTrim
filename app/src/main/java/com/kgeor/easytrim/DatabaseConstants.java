@@ -1,5 +1,8 @@
 package com.kgeor.easytrim;
 
+/**
+ * A class of constants for storing values relating to the database
+ */
 public class DatabaseConstants {
     public static final String DATABASE_NAME = "boatDatabase";
     public static final String TABLE_NAME = "BOATS_TABLE";
@@ -7,5 +10,4 @@ public class DatabaseConstants {
     public static final String BOAT_SPEED = "boatSpeed";
     public static final String BOAT_TRIM = "boatTrim";
     public static final int DATABASE_VERSION = 10;
-
 }

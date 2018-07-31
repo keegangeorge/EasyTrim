@@ -29,13 +29,17 @@ import static java.lang.Integer.parseInt;
 
 
 /**
+ * Fragment responsible for taking in user input of necessary details for calculation
  * A simple {@link Fragment} subclass.
  */
-public class StepperDetails extends Fragment implements Step, BlockingStep, AdapterView.OnItemSelectedListener {
+public class StepperDetails extends Fragment
+        implements Step, BlockingStep, AdapterView.OnItemSelectedListener {
+
+    // FIELDS //
     public static EditText maxSpeedInput;
     private SharedPreferences sharedPref;
-    private String unitsPref;
 
+    // CONSTRUCTOR //
     public StepperDetails() {
         // Required empty public constructor
 
@@ -52,6 +56,8 @@ public class StepperDetails extends Fragment implements Step, BlockingStep, Adap
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // SETUP SPINNERS //
         Spinner unitsSpinner = getActivity().findViewById(R.id.units_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.details_units, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -64,15 +70,16 @@ public class StepperDetails extends Fragment implements Step, BlockingStep, Adap
         conditionsSpinner.setAdapter(adapter1);
         conditionsSpinner.setOnItemSelectedListener(this);
 
+        // LINK EDIT TEXT //
         maxSpeedInput = getActivity().findViewById(R.id.max_speed_input);
-
-
-
-
-
-
     }
 
+    /**
+     * Method responsible for getting the maximum speed desired by the user
+     * and then setting the maxSpeedValue from that input
+     *
+     * @return the max speed value the user set
+     */
     public static int getMaxSpeedInput() {
         String value = maxSpeedInput.getText().toString();
         int maxSpeedValue = Integer.parseInt(value);
@@ -80,24 +87,31 @@ public class StepperDetails extends Fragment implements Step, BlockingStep, Adap
         return maxSpeedValue;
     }
 
+    /**
+     * @return null so the user can go tot he next step
+     */
     @Nullable
     @Override
     public VerificationError verifyStep() {
-        // return null if the user can go to the next step,
-        // create a new VerificationError instance otherwise
         return null;
     }
 
     @Override
     public void onSelected() {
-        // update UI when selected
     }
 
     @Override
     public void onError(@NonNull VerificationError error) {
-        // handle error inside of fragment, e.g. show error on EditText
     }
 
+    /**
+     * Method responsible for updating the measurement units based on what the user selects in the spinner
+     *
+     * @param parent the 
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -113,7 +127,6 @@ public class StepperDetails extends Fragment implements Step, BlockingStep, Adap
             editor.putString("units_list", "ME");
         }
         editor.apply();
-
 
 
     }

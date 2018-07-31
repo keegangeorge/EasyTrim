@@ -21,43 +21,42 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anderson.dashboardview.view.DashboardView;
-
-import org.w3c.dom.Text;
 
 import static android.content.Context.LOCATION_SERVICE;
 
 
 /**
+ * Fragment of the speedometer
+ *
+ * @author Keegan Geoge
+ * @version 1.0
  * A simple {@link Fragment} subclass.
  */
-public class Speedometer extends Fragment implements View.OnClickListener {
+public class Speedometer extends Fragment {
     // FIELDS //
     public static final String TAG = Speedometer.class.getSimpleName();
     protected int finalSpeed = 0;
     protected static int currentSpeedValue;
     public static int topSpeed;
+    float multiplier;
+    DataCommunication dataCommunication;
+
 
     // GUI //
-//    protected Button btnSpeed;
     protected DashboardView speedGauge;
-    float multiplier;
 
     // GPS & SENSOR RELATED //
     private LocationManager locationManager;
     private LocationListener locationListener;
-//    public static final int SENSOR_DELAY_MICROS = 16 & 1000; // 16 ms
 
     // SHARED PREFERENCES //
     private String unitsPref;
     private SharedPreferences sharedPref;
     protected static String curUnits = "knots";
 
-    DataCommunication dataCommunication;
 
     public Speedometer() {
         // Required empty public constructor
@@ -77,14 +76,9 @@ public class Speedometer extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
 
         dataCommunication = (DataCommunication) getActivity(); // init interface
-//        dataCommunication = (DataCommunication) getContext(); // init interface
 
         // GUI REFERENCES //
-//        btnSpeed = getActivity().findViewById(R.id.btnSpeed);
         speedGauge = getActivity().findViewById(R.id.speed_gauge);
-
-        // LISTENERS //
-//        btnSpeed.setOnClickListener(this);
 
         PreferenceManager.setDefaultValues(this.getActivity(), R.xml.pref_general, false);
         detectUnits();
@@ -109,17 +103,21 @@ public class Speedometer extends Fragment implements View.OnClickListener {
 
     }
 
+    /**
+     * Method responsible for initializing speed task asynchronous thread
+     */
     public void startSpeedCalc() {
         SpeedTask speedTask = new SpeedTask();
         speedTask.execute();
     }
 
+    /**
+     * Method responsible for detecting the speed measurement units selected by the user
+     */
     protected void detectUnits() {
+        // Reference to Shared Preferences
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
         unitsPref = sharedPref.getString("units_list", "NM");
-//        Toast.makeText(this.getActivity(), unitsPref, Toast.LENGTH_SHORT).show();
-        System.out.println("Units Pref: " + unitsPref);
-        System.out.println("Cur Pref: " + curUnits);
 
         switch (unitsPref) {
             case "NM":
@@ -144,7 +142,6 @@ public class Speedometer extends Fragment implements View.OnClickListener {
         if (locationListener != null) {
             locationManager.removeUpdates(locationListener);
         }
-
     }
 
     @Override
@@ -187,7 +184,6 @@ public class Speedometer extends Fragment implements View.OnClickListener {
         }
     }
 
-
     private void configureLocationUpdates() {
         Log.i(TAG, "configureLocationUpdates: requestLocationUpdate");
         // params:   provider, minTime(ms), minDistance, locationListener
@@ -200,7 +196,6 @@ public class Speedometer extends Fragment implements View.OnClickListener {
              * Occurs when permissions are denied on first app launch and then when user attempts to
              * use a feature that requires the permissions, this causes the permissions to pop up again
              */
-
             Log.i(TAG, "HERE_2");
             Toast.makeText(this.getActivity(), "Permissions Required for Application", Toast.LENGTH_LONG).show();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -215,31 +210,30 @@ public class Speedometer extends Fragment implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-//            case R.id.btnSpeed:
-//                startSpeedCalc(btnSpeed);
-//                Toast.makeText(this.getActivity(), "Starting Calculation...", Toast.LENGTH_SHORT).show();
-//                break;
-        }
-    }
-
+    /**
+     * Inner-class responsible for the asynchronous thread of the speed task
+     */
     public class SpeedTask extends AsyncTask<Void, Integer, Integer> {
 
+        /**
+         * Method responsible for doing the asynchronous task in the background
+         *
+         * @return an integer of the current speed value
+         */
         @Override
         protected Integer doInBackground(Void... voids) {
             locationListener = new LocationListener() {
-                float initSpeed = 0.0f;
-                float convertedSpeed;
-                float filteredSpeed;
+                float initSpeed = 0.0f; // initial raw data of the speed
+                float convertedSpeed; // the speed after being converted with the specified units
+                float filteredSpeed; // the speed after being filtered
 
                 @Override
                 public void onLocationChanged(Location location) {
-                    Log.i(TAG, "onLocationChanged: Method Start");
-                    initSpeed = location.getSpeed();
+                    initSpeed = location.getSpeed(); // gets the current speed value
 
-
+                    /* checks which is the current speed unit, and converts the speed value
+                     * based on the multiplier value
+                     */
                     switch (curUnits) {
                         case "knots":
                             multiplier = 1.94384f;
@@ -263,11 +257,18 @@ public class Speedometer extends Fragment implements View.OnClickListener {
                             break;
                     }
 
+                    // converts the initial speed with the multiplier
                     convertedSpeed = initSpeed * multiplier;
+                    // smooths out speed changes by using the filter method
                     filteredSpeed = filter(finalSpeed, convertedSpeed, 2);
+                    // converts the filtered speed into an integer value from a float
                     finalSpeed = (int) filteredSpeed;
+                    // sets the final speed as the percentage of the speed gauge
                     speedGauge.setPercent(finalSpeed);
+                    // uses the final speed for querying with the data in the database
+                    // in-order to represent the speed and trim value in the MainActivity
                     dataCommunication.viewQueryResults(finalSpeed);
+                    // sets the final speed as the currentSpeedValue for reference by other classes
                     currentSpeedValue = finalSpeed;
 
                     /*
@@ -286,14 +287,12 @@ public class Speedometer extends Fragment implements View.OnClickListener {
 
                 @Override
                 public void onProviderEnabled(String provider) {
-//                    textView.setText(R.string.standby);
                 }
 
                 @Override
                 public void onProviderDisabled(String provider) {
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(intent);
-//                    textView.setText(R.string.unavailable_service);
                 }
             };
             return finalSpeed;
@@ -307,7 +306,6 @@ public class Speedometer extends Fragment implements View.OnClickListener {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-//            textView.setText(R.string.detecting_speed);
 
         }
 
@@ -318,6 +316,4 @@ public class Speedometer extends Fragment implements View.OnClickListener {
 
         }
     } // end Async inner class
-
-
-}
+} // Speedometer fragment end
