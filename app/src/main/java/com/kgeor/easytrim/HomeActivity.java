@@ -84,7 +84,7 @@ public class HomeActivity extends AppCompatActivity implements
                     startActivity(i);
                 } else if (realPosition == 2) {
                     // STATS CARD //
-                    Intent i = new Intent(HomeActivity.this, WelcomeActivity.class);
+                    Intent i = new Intent(HomeActivity.this, StatsActivity.class);
                     startActivity(i);
                 }
                 break;
