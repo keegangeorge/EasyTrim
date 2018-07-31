@@ -11,6 +11,7 @@
     app:ms_nextButtonColor="@color/colorPrimary"
     app:ms_activeStepColor="@color/colorPrimary"
     app:ms_inactiveStepColor="#c3c3c3"
+    app:ms_completeButtonText="CALIBRATE"
     tools:context=".Tutorial">
 
 
