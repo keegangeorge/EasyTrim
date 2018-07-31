@@ -42,7 +42,10 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <activity android:name=".CalibrationTempActivity" />
+        <activity
+            android:name=".CalibrationTempActivity"
+            android:label="Calibrate"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".TrimDataResults">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
