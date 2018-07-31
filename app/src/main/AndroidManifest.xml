@@ -45,7 +45,7 @@
         <activity
             android:name=".CalibrationTempActivity"
             android:label="Calibrate"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".TrimDataResults">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -53,11 +53,11 @@
         </activity>
         <activity
             android:name=".Tutorial"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".StatsActivity"></activity>
     </application>
 
 </manifest>
