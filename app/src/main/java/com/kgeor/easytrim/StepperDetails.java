@@ -139,7 +139,6 @@ public class StepperDetails extends Fragment
             getMaxSpeedInput();
             callback.goToNextStep();
         }
-
     }
 
     @Override
