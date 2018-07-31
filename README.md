@@ -10,15 +10,15 @@ After calibration, view a speedometer that displays your current speed and the a
 #### Statistics
 View statistics based on your usage such as your top speed.
 
+## Screenshots
+### Tutorial View
+![](https://github.com/keegangeorge/EasyTrim/blob/master/EasyTrimTutorialScreen.gif)
+### Trim View
+![](https://github.com/keegangeorge/EasyTrim/blob/master/EasyTrimTrimView.gif)
+
 ## Coming Soon
 ```
 Backup data
 Add more conditions and boats
 More statistics
 ```
-
-## Screenshots
-### Tutorial View
-![](https://github.com/keegangeorge/EasyTrim/blob/master/EasyTrimTutorialScreen.gif)
-### Trim View
-![](https://github.com/keegangeorge/EasyTrim/blob/master/EasyTrimTrimView.gif)
