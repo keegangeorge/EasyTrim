@@ -48,8 +48,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kgeor.easytrim.MainActivity" />
         </activity>
-        <activity android:name=".Tutorial" />
-        <activity android:name=".Stepper.WelcomeActivity"></activity>
+        <activity
+            android:name=".Tutorial"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
