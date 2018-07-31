@@ -91,7 +91,7 @@ public class Speedometer extends Fragment {
                 /*
                  * Occurs on first launch of application and permissions are asked
                  */
-                Log.i(TAG, "HERE_3");
+                // Log.i(TAG, "Permissions Requested");
                 requestPermissions(new String[]{
                         Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.INTERNET
@@ -178,7 +178,8 @@ public class Speedometer extends Fragment {
                     /*
                      * Occurs when permissions are granted by the user
                      */
-                    Log.i(TAG, "onRequestPermissionsResult: PermissionGranted");
+                    // Log.i(TAG, "onRequestPermissionsResult: PermissionGranted");
+                    startSpeedCalc();
                     return;
                 }
         }
@@ -196,7 +197,7 @@ public class Speedometer extends Fragment {
              * Occurs when permissions are denied on first app launch and then when user attempts to
              * use a feature that requires the permissions, this causes the permissions to pop up again
              */
-            Log.i(TAG, "HERE_2");
+            // Log.i(TAG, "PERMISSIONS DENIED");
             Toast.makeText(this.getActivity(), "Permissions Required for Application", Toast.LENGTH_LONG).show();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
