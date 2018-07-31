@@ -57,7 +57,11 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".StatsActivity"></activity>
+        <activity android:name=".StatsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kgeor.easytrim.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
