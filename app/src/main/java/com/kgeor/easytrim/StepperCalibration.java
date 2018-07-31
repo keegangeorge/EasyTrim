@@ -29,8 +29,6 @@ public class StepperCalibration extends Fragment implements Step, View.OnClickLi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Button btnCalibrate = getActivity().findViewById(R.id.btnCalibrate);
-        btnCalibrate.setOnClickListener(this);
 
     }
 

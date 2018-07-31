@@ -39,19 +39,13 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter {
                 b3.putInt(CURRENT_STEP_POSITION_KEY, position);
                 step3.setArguments(b3);
                 return step3;
-            case 3:
-                final StepperCalibration step4 = new StepperCalibration();
-                Bundle b4 = new Bundle();
-                b4.putInt(CURRENT_STEP_POSITION_KEY, position);
-                step4.setArguments(b4);
-                return step4;
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
 
@@ -71,10 +65,6 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter {
             case 2:
                 return new StepViewModel.Builder(context)
                         .setTitle("Calibration")
-                        .create();
-            case 3:
-                return new StepViewModel.Builder(context)
-                        .setTitle("Complete!")
                         .create();
         }
         return null;

@@ -1,5 +1,6 @@
 package com.kgeor.easytrim;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
     // GUI //
     private TextView targetSpeed;
     private int maxSearchSpeed = 100;
+    private Button btnComplete;
 
 
     @Override
@@ -42,12 +45,14 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
         keepSearching = true;
         submitTrim = findViewById(R.id.set_trim);
         targetSpeed = findViewById(R.id.calibration_target_speed);
+        btnComplete = findViewById(R.id.calibration_complete);
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         // can be null if the sensor hardware is not available
         mRotationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 
         submitTrim.setOnClickListener(this);
+        btnComplete.setOnClickListener(this);
 
         db = new MyDatabase(this);
 
@@ -145,6 +150,9 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
             case R.id.set_trim:
                 addBoatSpecs();
                 break;
+            case R.id.calibration_complete:
+                Intent i = new Intent(CalibrationTempActivity.this, HomeActivity.class);
+                startActivity(i);
         }
     }
 

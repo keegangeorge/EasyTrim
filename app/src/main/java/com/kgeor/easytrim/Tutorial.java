@@ -1,5 +1,6 @@
 package com.kgeor.easytrim;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,8 @@ public class Tutorial extends AppCompatActivity implements StepperLayout.Stepper
 
     @Override
     public void onCompleted(View completeButton) {
+        Intent i = new Intent(Tutorial.this, CalibrationTempActivity.class);
+        startActivity(i);
     }
 
     @Override
