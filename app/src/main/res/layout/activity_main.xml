@@ -27,9 +27,9 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:paddingBottom="10dp"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                android:layout_height="wrap_content">
+                android:paddingBottom="10dp">
 
 
                 <com.airbnb.lottie.LottieAnimationView
@@ -40,6 +40,7 @@
                     app:lottie_autoPlay="true"
                     app:lottie_fileName="LOADING_GPS.json"
                     app:lottie_loop="true" />
+
             </FrameLayout>
         </LinearLayout>
     </ScrollView>
