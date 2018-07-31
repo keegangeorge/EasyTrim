@@ -39,7 +39,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     // FIELDS //
     public static final String TAG = Speedometer.class.getSimpleName();
     protected int finalSpeed = 0;
-    protected static int currentSpeedValue; // TODO remove this is temporary for testing
+    protected static int currentSpeedValue;
 
     // GUI //
 //    protected Button btnSpeed;
@@ -48,7 +48,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
 
     // GPS & SENSOR RELATED //
     private LocationManager locationManager;
-    private LocationListener locationListener; // TODO unregister on application close
+    private LocationListener locationListener;
 //    public static final int SENSOR_DELAY_MICROS = 16 & 1000; // 16 ms
 
     // SHARED PREFERENCES //
