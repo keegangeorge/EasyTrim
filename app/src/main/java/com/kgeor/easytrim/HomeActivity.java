@@ -36,8 +36,10 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cardItemState = "Trim View";
         setContentView(R.layout.activity_home_activity);
+        firstAppLaunch();
+
+        cardItemState = "Trim View";
 
         currentItemName = findViewById(R.id.item_name);
 
@@ -64,14 +66,6 @@ public class HomeActivity extends AppCompatActivity implements
                 .build());
 
         onItemChanged(data.get(0));
-
-//        if (itemPicker.getScrollState() == SCROLL_STATE_DRAGGING) {
-//            button2.setVisibility(View.INVISIBLE);
-//        } else {
-//            button2.setVisibility(View.VISIBLE);
-//        }
-
-
     }
 
     @Override
@@ -89,13 +83,25 @@ public class HomeActivity extends AppCompatActivity implements
                     Intent i = new Intent(HomeActivity.this, WelcomeActivity.class);
                     startActivity(i);
                 } else if (realPosition == 2) {
-                    // STATS CARD // 
+                    // STATS CARD //
                     Intent i = new Intent(HomeActivity.this, WelcomeActivity.class);
                     startActivity(i);
                 }
                 break;
         }
+    }
 
+    private void firstAppLaunch() {
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+
+        if (isFirstRun) {
+            //show start activity
+            startActivity(new Intent(HomeActivity.this, WelcomeActivity.class));
+        }
+
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putBoolean("isFirstRun", false).apply();
 
     }
 
