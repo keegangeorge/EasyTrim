@@ -111,7 +111,6 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     public void startSpeedCalc() {
         SpeedTask speedTask = new SpeedTask();
         speedTask.execute();
-        Toast.makeText(this.getActivity(), "Starting Calculation...", Toast.LENGTH_SHORT).show();
     }
 
     protected void detectUnits() {
