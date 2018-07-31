@@ -17,6 +17,8 @@ After calibration, view a speedometer that displays your current speed and the a
 View statistics based on your usage such as your top speed.
 
 ## Coming Soon
-> Backup data
-> Add more conditions and boats
-> More statistics
+```
+Backup data
+Add more conditions and boats
+More statistics
+```
