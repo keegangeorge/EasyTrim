@@ -25,59 +25,6 @@
                 android:layout_margin="0dp" />
 
 
-            <TextView
-                android:id="@+id/pitch"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Current Trim"
-                android:textAllCaps="true"
-                android:textColor="@color/colorGray"
-                android:textSize="15sp" />
-
-
-            <TextView
-                android:id="@+id/trim_up_or_down"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Connecting to GPS"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/information"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Info"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/colorBlueAlternate"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dip"
-                android:layout_weight="1"
-                android:gravity="center|bottom"
-                android:orientation="vertical">
-
-
-                <!--<Button-->
-                    <!--android:id="@+id/button"-->
-                    <!--android:layout_width="400dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_horizontal|center"-->
-                    <!--android:background="@color/colorAccent"-->
-                    <!--android:gravity="center"-->
-                    <!--android:onClick="viewDatabaseResults"-->
-                    <!--android:text="VIEW DATA"-->
-                    <!--android:textColor="@color/white" />-->
-
-
-            </LinearLayout>
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:paddingBottom="10dp"
