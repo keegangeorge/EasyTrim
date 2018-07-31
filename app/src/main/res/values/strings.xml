@@ -66,7 +66,7 @@
     <string name="snack_fail_action">Try Again</string>
     <string name="welcome_body">Easy Trim will help you to see what adjustments you need to make to your boat\'s trim angle.</string>
     <string name="welcome_title">Welcome!</string>
-    <string name="welcome_btn_setup">Start Setup</string>
+    <string name="welcome_btn_setup">GET STARTED</string>
     <string name="details_title">Information</string>
     <string name="details_title_body">Let\'s get some information to help us make some better calculations</string>
     <string name="max_speed_hint_text">100</string>
