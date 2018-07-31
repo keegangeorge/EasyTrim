@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
@@ -25,7 +24,7 @@ public class Tutorial extends AppCompatActivity implements StepperLayout.Stepper
 
     @Override
     public void onCompleted(View completeButton) {
-        Intent i = new Intent(Tutorial.this, CalibrationTempActivity.class);
+        Intent i = new Intent(Tutorial.this, CalibrationActivity.class);
         startActivity(i);
     }
 

@@ -19,7 +19,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import static com.kgeor.easytrim.MainActivity.boatTrim;
 import static com.kgeor.easytrim.Speedometer.currentSpeedValue;
 
-public class CalibrationTempActivity extends AppCompatActivity implements SensorEventListener, DataCommunication, View.OnClickListener {
+public class CalibrationActivity extends AppCompatActivity implements SensorEventListener, DataCommunication, View.OnClickListener {
     private LottieAnimationView submitTrim;
     static MyDatabase db;
     boolean keepSearching;
@@ -40,7 +40,7 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calibration_temp);
+        setContentView(R.layout.activity_calibration);
 
         keepSearching = true;
         submitTrim = findViewById(R.id.set_trim);
@@ -85,19 +85,16 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
                 break;
         }
         if (keepSearching) {
-            // TODO change i+= 5 to i+= 10 (5 for testing purposes)
-            for (int i = 0; i < maxSearchSpeed; i += 5) {
+            for (int i = 0; i < maxSearchSpeed; i += 10) {
                 System.out.println("For-loop is called");
                 boolean isThere = db.hasObject(String.valueOf(i));
 
                 if (!isThere) {
-                    submitTrim.setVisibility(View.VISIBLE); // TODO change to based on speed
+                    submitTrim.setVisibility(View.VISIBLE);
                     targetSpeed.setText(i + units);
                     keepSearching = false;
                     break;
                 }
-                System.out.println("HAS? " + isThere);
-
             }
         }
     }
@@ -151,7 +148,7 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
                 addBoatSpecs();
                 break;
             case R.id.calibration_complete:
-                Intent i = new Intent(CalibrationTempActivity.this, HomeActivity.class);
+                Intent i = new Intent(CalibrationActivity.this, HomeActivity.class);
                 startActivity(i);
         }
     }

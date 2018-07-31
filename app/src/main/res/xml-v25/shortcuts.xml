@@ -12,7 +12,7 @@
              do anything with it. Otherwise you're in for a crash! -->
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.kgeor.easytrim.CalibrationTempActivity"
+            android:targetClass="com.kgeor.easytrim.CalibrationActivity"
             android:targetPackage="com.kgeor.easytrim" />
     </shortcut>
 
