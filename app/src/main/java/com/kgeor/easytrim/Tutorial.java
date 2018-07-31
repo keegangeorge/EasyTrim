@@ -24,17 +24,14 @@ public class Tutorial extends AppCompatActivity implements StepperLayout.Stepper
 
     @Override
     public void onCompleted(View completeButton) {
-        Toast.makeText(this, "onCompleted!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onError(VerificationError verificationError) {
-        Toast.makeText(this, "onError! -> " + verificationError.getErrorMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onStepSelected(int newStepPosition) {
-        Toast.makeText(this, "onStepSelected! -> " + newStepPosition, Toast.LENGTH_SHORT).show();
     }
 
     @Override
