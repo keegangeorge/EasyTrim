@@ -1,4 +1,4 @@
-package com.kgeor.easytrim.Stepper;
+package com.kgeor.easytrim;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,8 +6,6 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 
-import com.kgeor.easytrim.Stepper.StepperDetails;
-import com.kgeor.easytrim.Stepper.StepperMountDevice;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.viewmodel.StepViewModel;
@@ -35,13 +33,25 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter {
                 b2.putInt(CURRENT_STEP_POSITION_KEY, position);
                 step2.setArguments(b2);
                 return step2;
+            case 2:
+                final StepperCalibration step3 = new StepperCalibration();
+                Bundle b3 = new Bundle();
+                b3.putInt(CURRENT_STEP_POSITION_KEY, position);
+                step3.setArguments(b3);
+                return step3;
+            case 3:
+                final StepperCalibration step4 = new StepperCalibration();
+                Bundle b4 = new Bundle();
+                b4.putInt(CURRENT_STEP_POSITION_KEY, position);
+                step4.setArguments(b4);
+                return step4;
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 4;
     }
 
 
@@ -52,11 +62,19 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter {
         switch (position){
             case 0:
                 return new StepViewModel.Builder(context)
-                        .setTitle("Tabs 1") //can be a CharSequence instead
+                        .setTitle("Information")
                         .create();
             case 1:
                 return new StepViewModel.Builder(context)
-                        .setTitle("Tabs 2") //can be a CharSequence instead
+                        .setTitle("Mount Device")
+                        .create();
+            case 2:
+                return new StepViewModel.Builder(context)
+                        .setTitle("Calibration")
+                        .create();
+            case 3:
+                return new StepViewModel.Builder(context)
+                        .setTitle("Complete!")
                         .create();
         }
         return null;
