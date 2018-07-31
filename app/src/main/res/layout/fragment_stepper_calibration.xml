@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     tools:context=".StepperCalibration">
 
@@ -34,6 +35,15 @@
             android:text="@string/calibrate_device_body"
             android:textAlignment="center"
             android:textColor="#a8c9ff" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/trim_correct_animation"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="CALIBRATE.json"
+            app:lottie_loop="true" />
     </LinearLayout>
 
 
