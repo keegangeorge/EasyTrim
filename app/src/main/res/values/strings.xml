@@ -74,6 +74,10 @@
     <string name="mount_device_body">Mount your device onto a stable stand to ensure that you are getting accurate values.</string>
     <string name="calibrate_device_title">Calibrate Device</string>
     <string name="calibrate_device_body">Accelerate to the indicated target speeds and click the button to record your trim data.</string>
+    <string name="stat_view_data">VIEW DATA</string>
+    <string name="current_condition_stat">CURRENT CONDITION</string>
+    <string name="units_stat">UNITS</string>
+    <string name="top_speed_stat">TOP SPEED</string>
 
     <string-array name="details_units">
         <item>Nautical Miles</item>
