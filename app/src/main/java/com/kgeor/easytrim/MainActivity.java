@@ -2,11 +2,13 @@ package com.kgeor.easytrim;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.anderson.dashboardview.view.DashboardView;
+
+import static com.kgeor.easytrim.StepperDetails.weatherCondition;
 
 
 /**
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity
 
     // DATABASE //
     static MyDatabase db;
+    static MyDatabase dbWindLight, dbWindStrong, dbStorm, dbSunny;
 
 
     /**
@@ -93,7 +98,7 @@ public class MainActivity extends AppCompatActivity
         speedGauge = findViewById(R.id.speed_gauge);
 
         // DATABASE //
-        db = new MyDatabase(this);
+        initDatabase();
 
         // SENSORS & GPS //
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -179,6 +184,37 @@ public class MainActivity extends AppCompatActivity
             trimCorrectAnimation.pauseAnimation();
         }
     }
+
+    /**
+     * Method responsible for initializing database based on the current weather condition
+     */
+    public void initDatabase() {
+        // DATABASE //
+        dbWindLight = new MyDatabase(this);
+        dbWindStrong = new MyDatabase(this);
+        dbStorm = new MyDatabase(this);
+        dbSunny = new MyDatabase(this);
+
+        switch (weatherCondition) {
+            case "Sunny":
+                db = dbSunny;
+                System.out.println("DB SET TO SUNNY");
+                break;
+            case "Light Wind":
+                db = dbWindLight;
+                System.out.println("DB SET TO LIGHT WIND");
+                break;
+            case "Strong Wind":
+                db = dbWindStrong;
+                System.out.println("DB SET TO STRONG WIND");
+                break;
+            case "Storm":
+                db = dbStorm;
+                System.out.println("DB SET TO STORM");
+                break;
+        }
+    }
+
 
 } // MainActivity class end
 

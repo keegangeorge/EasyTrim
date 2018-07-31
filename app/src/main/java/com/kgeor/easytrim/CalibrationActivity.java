@@ -18,6 +18,7 @@ import com.airbnb.lottie.LottieAnimationView;
 
 import static com.kgeor.easytrim.MainActivity.boatTrim;
 import static com.kgeor.easytrim.Speedometer.currentSpeedValue;
+import static com.kgeor.easytrim.StepperDetails.weatherCondition;
 
 /**
  * Activity responsible for submitting trim values based on the boat's speed to the database
@@ -30,6 +31,8 @@ public class CalibrationActivity extends AppCompatActivity
     boolean keepSearching;
     private int maxSearchSpeed = 100;
     static MyDatabase db;
+    static MyDatabase dbWindLight, dbWindStrong, dbStorm, dbSunny;
+
 
     // GUI //
     private LottieAnimationView submitTrim;
@@ -67,9 +70,39 @@ public class CalibrationActivity extends AppCompatActivity
         btnComplete.setOnClickListener(this);
 
         // DATABASE INITIALIZATION //
-        db = new MyDatabase(this);
+        initDatabase();
 
     } // onCreate() method end
+
+    /**
+     * Method responsible for initializing database based on the current weather condition
+     */
+    public void initDatabase() {
+        // DATABASE //
+        dbWindLight = new MyDatabase(this);
+        dbWindStrong = new MyDatabase(this);
+        dbStorm = new MyDatabase(this);
+        dbSunny = new MyDatabase(this);
+
+        switch (weatherCondition) {
+            case "Sunny":
+                db = dbSunny;
+                System.out.println("DB SET TO SUNNY");
+                break;
+            case "Light Wind":
+                db = dbWindLight;
+                System.out.println("DB SET TO LIGHT WIND");
+                break;
+            case "Strong Wind":
+                db = dbWindStrong;
+                System.out.println("DB SET TO STRONG WIND");
+                break;
+            case "Storm":
+                db = dbStorm;
+                System.out.println("DB SET TO STORM");
+                break;
+        }
+    }
 
     @Override
     protected void onPause() {
@@ -217,4 +250,6 @@ public class CalibrationActivity extends AppCompatActivity
             addBoatSpecs();
         }
     } // MyTryAgainListener inner class end
+
+
 } // CalibrationActivity end

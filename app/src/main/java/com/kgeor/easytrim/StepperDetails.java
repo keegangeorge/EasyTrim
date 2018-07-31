@@ -2,6 +2,7 @@ package com.kgeor.easytrim;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +26,7 @@ import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import static android.content.Context.MODE_PRIVATE;
 import static java.lang.Integer.parseInt;
 
 
@@ -37,7 +39,8 @@ public class StepperDetails extends Fragment
 
     // FIELDS //
     public static EditText maxSpeedInput;
-    private SharedPreferences sharedPref;
+    private SharedPreferences sharedPref, sharedPreferences;
+    public static String weatherCondition = "Sunny";
 
     // CONSTRUCTOR //
     public StepperDetails() {
@@ -112,18 +115,48 @@ public class StepperDetails extends Fragment
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
         SharedPreferences.Editor editor = sharedPref.edit();
-        if (parent.getItemAtPosition(position).toString().equals("Nautical Miles")) {
-            editor.putString("units_list", "NM");
-        } else if (parent.getItemAtPosition(position).toString().equals("Kilometers")) {
-            editor.putString("units_list", "KM");
-        } else if (parent.getItemAtPosition(position).toString().equals("Miles")) {
-            editor.putString("units_list", "MI");
-        } else if (parent.getItemAtPosition(position).toString().equals("Meters")) {
-            editor.putString("units_list", "ME");
+        switch (parent.getItemAtPosition(position).toString()) {
+            case "Nautical Miles":
+                editor.putString("units_list", "NM");
+                break;
+            case "Kilometers":
+                editor.putString("units_list", "KM");
+                break;
+            case "Miles":
+                editor.putString("units_list", "MI");
+                break;
+            case "Meters":
+                editor.putString("units_list", "ME");
+                break;
         }
         editor.apply();
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+        SharedPreferences.Editor conditionsEditor = sharedPref.edit();
 
+        switch (parent.getItemAtPosition(position).toString()) {
+            case "Sunny":
+                conditionsEditor.putString("CONDITION", "SUNNY");
+                weatherCondition = "Sunny";
+                // System.out.println("Sunny Condition Added");
+                break;
+            case "Light Wind":
+                conditionsEditor.putString("CONDITION", "WIND_LIGHT");
+                weatherCondition = "Light Wind";
+                // System.out.println("Light Wind Condition Added");
+                break;
+            case "Strong Wind":
+                conditionsEditor.putString("CONDITION", "WIND_STRONG");
+                weatherCondition = "Strong Wind";
+                // System.out.println("Strong Wind Condition Added");
+                break;
+            case "Storm":
+                conditionsEditor.putString("CONDITION", "STORM");
+                weatherCondition = "Storm";
+                // System.out.println("Storm Condition Added");
+                break;
+        }
+        conditionsEditor.apply();
     }
 
     @Override
