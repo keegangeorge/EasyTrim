@@ -132,11 +132,11 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
 
         if (id < 0) {
             failSnack.show();
-            submitTrim.setAnimation("done_button.json");
+            submitTrim.setAnimation("BTN_FAIL3.json");
             submitTrim.playAnimation();
         } else {
             Snackbar.make(findViewById(R.id.calibration_linear), "Speed: " + targetSpeed.getText() + " Calibrated", Snackbar.LENGTH_LONG).show();
-            submitTrim.setAnimation("done_button.json");
+            submitTrim.setAnimation("BTN_SUCCESS2.json");
             submitTrim.playAnimation();
             keepSearching = true;
             checkTargetSpeed();

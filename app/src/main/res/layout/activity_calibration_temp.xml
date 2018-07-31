@@ -50,7 +50,7 @@
                 android:visibility="invisible"
                 android:layout_gravity="center"
                 app:lottie_autoPlay="false"
-                app:lottie_fileName="done_button.json"
+                app:lottie_fileName="BTN_SUCCESS.json"
                 app:lottie_loop="false" />
 
             <Button
