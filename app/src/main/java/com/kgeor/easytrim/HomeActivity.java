@@ -81,18 +81,17 @@ public class HomeActivity extends AppCompatActivity implements
                 int realPosition = infiniteAdapter.getRealPosition(itemPicker.getCurrentItem());
                 DataItem current = data.get(realPosition);
                 if (realPosition == 0) {
-                    System.out.println("Trim View Position?");
+                    // TRIM VIEW CARD //
                     Intent i = new Intent(HomeActivity.this, MainActivity.class);
                     startActivity(i);
                 } else if (realPosition == 1) {
-                    System.out.println("Calibration Position?");
-                    Intent i = new Intent(HomeActivity.this, CalibrationTempActivity.class);
-                    startActivity(i);
-                } else if (realPosition == 2) {
+                    // CALIBRATION CARD //
                     Intent i = new Intent(HomeActivity.this, WelcomeActivity.class);
                     startActivity(i);
-                } else {
-                    System.out.println("WHAT!");
+                } else if (realPosition == 2) {
+                    // STATS CARD // 
+                    Intent i = new Intent(HomeActivity.this, WelcomeActivity.class);
+                    startActivity(i);
                 }
                 break;
         }
