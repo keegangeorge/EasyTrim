@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.kgeor.easytrim.StepperDetails.weatherCondition;
+
 /**
  * StatsActivity class responsible for displaying statistics to the user
  */
@@ -37,6 +39,7 @@ public class StatsActivity extends AppCompatActivity implements View.OnClickList
         // SET TEXT VALUES //
         topSpeed.setText(Integer.toString(Speedometer.topSpeed) + " " + Speedometer.curUnits);
         measurementUnit.setText(Speedometer.curUnits);
+        condition.setText(weatherCondition);
     }
 
     @Override
