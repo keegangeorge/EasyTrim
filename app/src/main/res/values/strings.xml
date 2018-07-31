@@ -70,6 +70,10 @@
     <string name="details_title">Information</string>
     <string name="details_title_body">Let\'s get some information to help us make some better calculations</string>
     <string name="max_speed_hint_text">100</string>
+    <string name="mount_device">Mount Device</string>
+    <string name="mount_device_body">Mount your device onto a stable stand to ensure that you are getting accurate values.</string>
+    <string name="calibrate_device_title">Calibrate Device</string>
+    <string name="calibrate_device_body">Accelerate to the indicated target speeds and click the button to record your trim data.</string>
 
     <string-array name="details_units">
         <item>Nautical Miles</item>
