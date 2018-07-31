@@ -1,17 +1,14 @@
 package com.kgeor.easytrim;
 
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +18,6 @@ import static com.kgeor.easytrim.MainActivity.boatTrim;
 import static com.kgeor.easytrim.Speedometer.currentSpeedValue;
 
 public class CalibrationTempActivity extends AppCompatActivity implements SensorEventListener, DataCommunication, View.OnClickListener {
-    //    private Button submitTrim;
     private LottieAnimationView submitTrim;
     static MyDatabase db;
     boolean keepSearching;
@@ -35,8 +31,7 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
 
     // GUI //
     private TextView targetSpeed;
-    private int maxSearchSpeed = 20;
-    // TODO allow max search speed to be set by the user
+    private int maxSearchSpeed = 100;
 
 
     @Override
@@ -52,7 +47,6 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
         // can be null if the sensor hardware is not available
         mRotationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 
-
         submitTrim.setOnClickListener(this);
 
         db = new MyDatabase(this);
@@ -64,7 +58,6 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
-
     }
 
     protected void checkTargetSpeed() {
@@ -108,6 +101,7 @@ public class CalibrationTempActivity extends AppCompatActivity implements Sensor
     protected void onResume() {
         super.onResume();
         System.out.println("CALIBRATION onRESUME() CALLED");
+        maxSearchSpeed = StepperDetails.getMaxSpeedInput();
         checkTargetSpeed();
 
 
