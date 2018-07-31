@@ -40,6 +40,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
     public static final String TAG = Speedometer.class.getSimpleName();
     protected int finalSpeed = 0;
     protected static int currentSpeedValue;
+    public static int topSpeed;
 
     // GUI //
 //    protected Button btnSpeed;
@@ -266,9 +267,16 @@ public class Speedometer extends Fragment implements View.OnClickListener {
                     filteredSpeed = filter(finalSpeed, convertedSpeed, 2);
                     finalSpeed = (int) filteredSpeed;
                     speedGauge.setPercent(finalSpeed);
-                    // viewQueryResults(finalSpeed); // TODO is working without implementation?
                     dataCommunication.viewQueryResults(finalSpeed);
                     currentSpeedValue = finalSpeed;
+
+                    /*
+                     * When the current speed exceeds the top speed
+                     * Set the top speed as the current speed
+                     */
+                    if (finalSpeed > topSpeed) {
+                        topSpeed = finalSpeed;
+                    }
                 }
 
                 @Override
