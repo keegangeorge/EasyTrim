@@ -114,8 +114,6 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
     }
 
 
-
-
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor == mRotationSensor) {
