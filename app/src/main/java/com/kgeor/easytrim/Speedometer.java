@@ -68,6 +68,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_speedometer, container, false);
+
     }
 
     @Override
@@ -75,6 +76,7 @@ public class Speedometer extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
 
         dataCommunication = (DataCommunication) getActivity(); // init interface
+//        dataCommunication = (DataCommunication) getContext(); // init interface
 
         // GUI REFERENCES //
 //        btnSpeed = getActivity().findViewById(R.id.btnSpeed);
