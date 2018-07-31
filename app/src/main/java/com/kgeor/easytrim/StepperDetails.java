@@ -106,11 +106,6 @@ public class StepperDetails extends Fragment
 
     /**
      * Method responsible for updating the measurement units based on what the user selects in the spinner
-     *
-     * @param parent the 
-     * @param view
-     * @param position
-     * @param id
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -133,12 +128,11 @@ public class StepperDetails extends Fragment
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     @Override
     public void onNextClicked(final StepperLayout.OnNextClickedCallback callback) {
-
+        // Sets a requirement for a max speed to be set before the next step can be proceeded to
         if (TextUtils.isEmpty(maxSpeedInput.getText())) {
             Toast.makeText(this.getActivity(), "Max Speed Required!", Toast.LENGTH_SHORT).show();
         } else {

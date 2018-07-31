@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.kgeor.easytrim.R;
 
+/**
+ * WelcomeActivity class responsible for welcoming the user upon first start-up and directing
+ * the user to the Tutorial Stepper
+ */
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnSetup;
 
@@ -17,7 +20,6 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_welcome);
         btnSetup = findViewById(R.id.btnWelcomeSetup);
         btnSetup.setOnClickListener(this);
-
     }
 
     @Override

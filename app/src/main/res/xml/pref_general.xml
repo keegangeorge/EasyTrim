@@ -16,18 +16,18 @@
             android:summary="@string/pref_body_calibrate"
             android:title="@string/pref_title_calibrate">
             <intent
-            android:action="android.intent.action.MAIN"
-            android:targetClass="com.kgeor.easytrim.CalibrationTempActivity"
-            android:targetPackage="com.kgeor.easytrim" />
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.kgeor.easytrim.CalibrationTempActivity"
+                android:targetPackage="com.kgeor.easytrim" />
         </Preference>
 
         <Preference
             android:summary="@string/pref_body_database"
             android:title="@string/pref_title_database">
             <intent
-            android:action="android.intent.action.MAIN"
-            android:targetClass="com.kgeor.easytrim.TrimDataResults"
-            android:targetPackage="com.kgeor.easytrim" />
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.kgeor.easytrim.TrimDataResults"
+                android:targetPackage="com.kgeor.easytrim" />
         </Preference>
 
     </PreferenceCategory>

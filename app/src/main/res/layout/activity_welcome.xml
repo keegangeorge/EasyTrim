@@ -46,20 +46,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                app:lottie_autoPlay="true"
                 android:layout_margin="50dp"
+                app:lottie_autoPlay="true"
                 app:lottie_fileName="WELCOME_ANIMATION.json"
                 app:lottie_loop="true" />
 
-            <!-- LAYOUT MARGIN TOP ON BUTTON IS TEMPORARY-->
             <Button
                 android:id="@+id/btnWelcomeSetup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
+                android:layout_marginTop="50dp"
                 android:backgroundTint="#FFFFFF"
                 android:gravity="center"
-                android:layout_marginTop="50dp"
                 android:paddingBottom="10dp"
                 android:paddingEnd="20dp"
                 android:paddingStart="20dp"

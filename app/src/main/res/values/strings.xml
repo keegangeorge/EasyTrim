@@ -58,9 +58,6 @@
     <string name="pref_title_version">Version</string>
     <string name="detecting_speed">Detecting speed…</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!-- Snack bar Strings -->
     <string name="snack_fail">Trim not recorded</string>
     <string name="snack_fail_action">Try Again</string>
@@ -81,7 +78,13 @@
     <string name="calibration_complete">Calibration Complete</string>
     <string name="pending_targetSpeed">Pending Request</string>
     <string name="targetSpeed_title">Target Speed to Calibrate:</string>
+    <string name="view_home">View</string>
+    <string name="data_placeholder_none">No data</string>
+    <string name="info_title_units">Units</string>
+    <string name="info_title_condition">Condition</string>
+    <string name="info_title_maxSpeed">Maximum Speed</string>
 
+    <!-- Stepper Details: Units -->
     <string-array name="details_units">
         <item>Nautical Miles</item>
         <item>Kilometers</item>
@@ -89,6 +92,7 @@
         <item>Meters</item>
     </string-array>
 
+    <!-- Stepper Details: Weather Conditions -->
     <string-array name="conditions">
         <item>Sunny</item>
         <item>Windy</item>

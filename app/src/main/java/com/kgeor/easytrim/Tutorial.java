@@ -8,6 +8,9 @@ import android.view.View;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+/**
+ * Tutorial class responsible for implementing the stepper layout
+ */
 public class Tutorial extends AppCompatActivity implements StepperLayout.StepperListener {
     private StepperLayout mStepperLayout;
 

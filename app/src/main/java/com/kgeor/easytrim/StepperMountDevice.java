@@ -14,6 +14,7 @@ import com.stepstone.stepper.VerificationError;
 
 
 /**
+ * Fragment class responsible for the encouraging the user to mount their device
  * A simple {@link Fragment} subclass.
  */
 public class StepperMountDevice extends Fragment implements Step {
@@ -40,18 +41,14 @@ public class StepperMountDevice extends Fragment implements Step {
     @Nullable
     @Override
     public VerificationError verifyStep() {
-        // return null if the user can go to the next step,
-        // create a new VerificationError instance otherwise
         return null;
     }
 
     @Override
     public void onSelected() {
-        // update UI when selected
     }
 
     @Override
     public void onError(@NonNull VerificationError error) {
-        // handle error inside of fragment, e.g. show error on EditText
     }
 }

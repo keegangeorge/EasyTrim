@@ -25,8 +25,6 @@ dependencies {
     implementation 'com.github.SuperKung:DashboardView:1.2.1'
     implementation 'com.android.support:preference-v7:27.1.1'
     implementation 'com.airbnb.android:lottie:2.5.5'
-
-//    TODO REMOVE NOT NEEDED ONES
     implementation 'com.stepstone.stepper:material-stepper:4.3.1'
     implementation 'com.yarolegovich:discrete-scrollview:1.4.7'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
