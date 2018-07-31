@@ -1,10 +1,11 @@
-package com.kgeor.easytrim.Stepper;
+package com.kgeor.easytrim;
 
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,10 @@ import com.stepstone.stepper.VerificationError;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StepperMountDevice extends Fragment implements Step {
+public class StepperComplete extends Fragment implements Step {
 
 
-    public StepperMountDevice() {
+    public StepperComplete() {
         // Required empty public constructor
     }
 
@@ -29,24 +30,22 @@ public class StepperMountDevice extends Fragment implements Step {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_step_fragment_boat_details, container, false);
+        return inflater.inflate(R.layout.fragment_stepper_complete, container, false);
     }
 
     @Nullable
     @Override
     public VerificationError verifyStep() {
-        // return null if the user can go to the next step,
-        // create a new VerificationError instance otherwise
         return null;
     }
 
     @Override
     public void onSelected() {
-        // update UI when selected
+
     }
 
     @Override
     public void onError(@NonNull VerificationError error) {
-        // handle error inside of fragment, e.g. show error on EditText
+
     }
 }
