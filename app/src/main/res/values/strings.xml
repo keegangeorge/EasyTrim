@@ -95,8 +95,9 @@
     <!-- Stepper Details: Weather Conditions -->
     <string-array name="conditions">
         <item>Sunny</item>
-        <item>Windy</item>
-        <item>Rainy</item>
+        <item>Light Wind</item>
+        <item>Strong Wind</item>
+        <item>Storm</item>
     </string-array>
 
 </resources>
